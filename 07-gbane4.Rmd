@@ -1,0 +1,326 @@
+# Gbané (2021), Masse du blanc
+
+## Présentation
+
+Variable explicative :
+
+- `diet` : le régime
+
+Variable expliquée :
+
+- `alb` : la Masse du blanc (g)
+
+
+```{r message = FALSE, warning=FALSE, echo=FALSE}
+library(ggpubr)
+library(rstatix)
+library(Rmisc)
+library(agricolae)
+library(tidyverse)
+```
+
+
+## Les données
+
+```{r}
+df <- read_csv("data/degg.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(week = factor(week),
+         diet = factor(diet))
+df_copy <- df # copie
+```
+
+```{r}
+glimpse(df)
+```
+
+
+## Semaine 3
+
+```{r}
+df <- df %>% 
+  select(id, week, diet, alb) %>% 
+  filter(week == "Week 3")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = alb)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse du blanc (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(alb) %>% 
+  select(id, diet, alb, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(alb ~ diet, data = df)
+Anova(lm)
+```
+
+=> Différence d'effets très significative entre certains régimes sur la masse du blanc. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra que la conclusion de l'ANOVA peut être considérée valide : => différence d'effet significative entre certains régimes sur la masse du blanc à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  select(diet, alb, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = alb)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 7) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse du blanc (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+## Semaine 4
+
+```{r}
+df <- df_copy %>% 
+  select(id, week, diet, alb) %>% 
+  filter(week == "Week 4")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = alb)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse du blanc (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(alb) %>% 
+  select(id, diet, alb, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(alb ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade certains régimes se distinguent par une différence d'effets significative sur la masse du blanc. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+La normalité n'est pas respectée. Essayons peut-être le non-paramétrique.
+
+```{r}
+df %>% 
+  kruskal_test(alb ~ diet)
+```
+
+=> Prétend qu'il n'y a pas de différence d'effets significative entre les régimes sur la masse du blanc. 
+
+```{r}
+df %>% 
+  dunn_test(alb ~ diet, p.adjust.method = "bonferroni") %>% 
+  select(group1, group2, p, p.adj, p.adj.signif) #%>% 
+  #filter(p.adj.signif != "ns")
+```
+
+La normalité n'étant pas respectée, on s'entiendra ici au résultat du non paramétrique. Pas de différences.
+
+
+
+## Semaine 5
+
+```{r}
+df <- df_copy %>% 
+  select(id, week, diet, alb) %>% 
+  filter(week == "Week 5")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = alb)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse du blanc (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(alb) %>% 
+  select(id, diet, alb, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(alb ~ diet, data = df)
+Anova(lm)
+```
+
+=> Pas de différence d'effets significative sur la masse du blanc également. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra, à la faveur des tests, que la conclusion de l'ANOVA peut être considérée valide : => Pas de différence d'effet significative entre les régimes sur la masse du blanc à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  select(diet, alb, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = alb)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 7) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse du blanc (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+### Évolution de la Masse du blanc dans le temps selon les régimes
+
+```{r}
+df_ic <- summarySE(df_copy, 
+                   measurevar = "alb", 
+                   groupvars = c("week", "diet"))
+
+#write_csv(df_ic, "tab/alb_moy_temps.csv")
+df_ic
+```
+
+
+```{r}
+ggplot(df_ic, aes(x = week, y = alb, colour = diet, group = diet)) + 
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  ylab("Masse du blanc - g") + xlab("Temps") +
+  theme_bw()
+```
+
+
+
+

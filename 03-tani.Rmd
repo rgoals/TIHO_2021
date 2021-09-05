@@ -1,0 +1,1392 @@
+
+# Tani, 2021
+
+Variables explicatives :
+
+- `aa`  : Acacia auriculiformis
+- `sex` : sexe
+
+Variables expliquées :
+
+- `wbc`	:  White blood cell (10^3/μL)
+- `lym`	:  Lymphocytes (10^3/μL)
+- `gran` : Granulocytes (10^3/μL)
+- `rbc`	:  Red blood cell (10^6/μL)
+- `hgb`	:  Hémoglobine (g/dL)
+- `hct`	:  Hématocrite (%)
+- `mcv`	:  Mean corpuscular volume (fL)
+- `plt` :  Platelet (10^3/μL)
+ 
+Comparer les effets des valiables explicatives sur les variables dépendantes prises individuellement, en tenant compte de l'interaction `A.a * Sex`.
+
+
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+library(ggpubr)
+library(rstatix)
+library(car)
+library(broom)
+library(GGally)
+library(Rmisc)
+library(multcomp)
+library(agricolae)
+library(tidyverse)
+```
+
+
+
+## Les données
+
+Les données du fichier excel sont formatées en tableau `dnfs.csv` pour R.
+
+```{r}
+df <- read_csv("data/dnfs.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(aa = factor(aa),
+         sex = factor(sex))
+df_copy <- df
+```
+
+```{r}
+glimpse(df)
+```
+
+
+
+## Globules blanc `wbc`(10^3/μL)
+
+
+```{r}
+df <- df %>% 
+  select(id, aa, sex, wbc)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = wbc, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("White blood cell (10^3/μL)") + xlab("Dose Acacia auriculiformis")
+```
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>%
+  group_by(aa) %>%
+  identify_outliers(wbc)
+df_out
+```
+
+```{r}
+df_out <- df %>%
+  group_by(sex) %>%
+  identify_outliers(wbc)
+df_out
+```
+
+Pure coincidence peut-être, ce sont les mêmes pour les 2 facteurs ! On pourrait choisir de les ignorer pour la suite en activant le code suivant. Je le ferai si jamais ceci améliorait la distribution des données.
+
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+Les 4 observations désignées comme étant extrêmes ont été écartées.
+
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = wbc, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("White blood cell (10^3/μL)") + xlab("Dose Acacia auriculiformis")
+```
+
+
+
+### Visualisation de l'interaction probable
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "wbc", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = wbc, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = wbc - ci, ymax = wbc + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2) +
+  theme_bw() +
+  ylab("White blood cell (10^3/μL)") + xlab("Dose Acacia auriculiformis")
+```
+
+Sans les outliers, la distribution semble similaire chez les mâles comme chez les femmelles. Avec ces intervalles de confiance, il serait peu probable de trouver des différences significatives ...
+
+
+### Le modèle
+
+```{r}
+lm <- lm(wbc ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction n'est pas significative, les effets des facteurs pris individuellement également. Mais vérifions la validité de l'anaova.
+
+### Hypothèses de l'ANOVA
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+**Plot des résidus vs fitted values :** Les résidus semblent tous globalement centrés sur 0. Hypothèse valide.
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+**Plot des résidus standardisés vs quantiles théoriques :** 
+
+Les points semblent bien répartis le long de la ligne. Les résidus peuvent être considérés comme distribués selon une loi normale. 
+
+Aussi le test de normalité de Shapiro-Wilk :
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+#### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+**Plot des résidus standardisés vs valeurs prédites :** 
+
+Les dispersions des résidus (leurs écartements verticaux) relatives à chaque groupe (croisement des modalités des 2 facteurs) sont globalement identiques, l’hypothèse d’homogénéité des résidus peut être acceptée.
+
+
+```{r}
+par(mfrow = c(2, 2))
+plot(lm)
+```
+
+
+### Ajustement du modèle sans le terme d'interaction
+
+L’interaction n’étant pas significative, **Avant d’interpréter les résultats, on va ajuster à nouveau le modèle de l’ANOVA à deux facteurs, mais sans le terme d’interaction**.
+
+Lorsque le modèle ne contient pas de terme d’interaction, on utilise les carrés de type II. Pour cela, il suffit simplement d’utiliser les contrastes par défaut qui sont de type `contr.treatment` (donc ne pas les modifier dans le code).
+
+```{r}
+lm <- lm(wbc ~ aa + sex, data = df)
+Anova(lm)
+```
+
+Il n'y aurait pas de différence d'effet significatif entre les doses `Aa` ou suivant le `sexe`.
+
+
+### Comparaisons par paires
+
+Les moyennes sont ensuite comparées 2 à 2 selon l’approche des Contrastes de Tukey, fonction `glht()`, package `multcomp`.
+
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+
+##	Lymphocytes `lym` (10^3/μL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, lym)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = lym, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Lymphocytes (10^3/μL)")
+```
+
+La distribution semble similaire à celle de la variable précédente.
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "lym", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = lym, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = lym - ci, ymax = lym + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+Une interaction semble évidente ici ...
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(lym)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(lym)
+
+df_out
+```
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = lym, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("LYM")
+```
+
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "lym", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = lym, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = lym - ci, ymax = lym + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+Sans les outliers, la distribution semble identique chez les mâles et les femmelles. ...
+
+
+### Le modèle
+
+
+```{r}
+lm <- lm(lym ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+Les différences ne sont pas significatives. Mais vérifions la validité de l'ANOVA.
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+
+### Comparaisons par paires
+
+Contrastes de Tukey, fonction `glht()`, package `multcomp`.
+
+```{r}
+lm <- lm(lym ~ aa + sex, data = df)
+Anova(lm)
+```
+
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+
+## Granulocytes `gran` (10^3/μL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, gran)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Granulocytes (10^3/μL)")
+```
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "gran", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = gran - ci, ymax = gran + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(gran)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(gran)
+
+df_out
+```
+
+On exclura les 2 dernières observations
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("GRAN")
+```
+
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "gran", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = gran - ci, ymax = gran + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+### Le modèle
+
+
+```{r}
+lm <- lm(gran ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+Les différences ne sont pas significatives. Mais vérifions la validité de l'ANOVA.
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+Les hypothèses de l'ANOVA ne sont à l'évidence pas respectées. Les transformations `log()`, `sqrt()` ni `Box-Cox` n'améliorent pas non plus la distribution. Ajustons le modèle sans le terme d'interaction et voyons comment il se comporte, sans les 2 points extrêmes.
+
+```{r}
+lm <- lm(gran ~ aa + sex, data = df)
+Anova(lm)
+```
+
+=> Différence d'effet non significative. 
+
+```{r}
+plot(lm, 1)
+```
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+plot(lm, 3)
+```
+
+
+#### Comparaisons par paires
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+
+## 	Red blood cell `rbc` (10^6/μL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, rbc)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("RBC")
+```
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "rbc", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = rbc, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = rbc - ci, ymax = rbc + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+=> Une interaction semble évidente ...
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(rbc)
+
+df_out
+```
+
+=> 2 points extrêmes : 18 et 39.
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(rbc)
+
+df_out
+```
+
+=> Les mêmes
+
+On exclura les 3 observations concernées
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("RBC")
+```
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "rbc", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = rbc, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = rbc - ci, ymax = rbc + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+Sans les outliers, probablement pas d'interaction ni de différences significatives.
+
+
+
+### ANOVA sans les outliers
+
+
+```{r}
+lm <- lm(rbc ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+Les différences ne sont pas significatives. Mais vérifions la validité de l'ANOVA.
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+
+#### Comparaisons par paires
+
+```{r}
+lm <- lm(rbc ~ aa + sex, data = df)
+Anova(lm)
+```
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+
+
+#	Hémoglobine `hgb` (g/dL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, hgb)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Hémoglobine (g/dL)")
+```
+
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "hgb", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = hgb - ci, ymax = hgb + ci), width = .1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(hgb)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(hgb)
+
+df_out
+```
+
+On exclura les 3 dernières ...
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Hémoglobine (g/dL)")
+```
+
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "hgb", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = hgb - ci, ymax = hgb + ci), width = .1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+### ANOVA sans les outliers
+
+
+```{r}
+lm <- lm(hgb ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction n'est pas significative. Il y a une différence entre les effets de certaines doses de AA. Mais vérifions la validité de l'ANOVA.
+
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+### Ajustement du modèle sans le terme d'interaction
+
+```{r}
+lm <- lm(hgb ~ aa + sex, data = df)
+Anova(lm)
+```
+
+Il n'y a une différence d'effet significatif entre certaines doses AA.
+
+
+### Comparaisons par paires
+
+On pourrait ramener à une anova à 1 facteur puisqu'il n'y a pas de différence pour l'autre facteur. Mais montrons quand même les contrastes.
+
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+=> Différence significative entre Aa_0.75 et Aa_0. Le témoin a un effet plus grand que la dose 0.75 !
+
+
+
+## L'hématocrite `hct` (%)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, hct)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Hématocrite (%)")
+```
+
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "hct", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = hct, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = hct - ci, ymax = hct + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+Pratiquement même allure que la variable précédente ...
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(hct)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(hct)
+
+df_out
+```
+
+On exclura les 3 dernières car l'id 34 déforme fortement la distribution si cette vaeur n'est pas écartée ...
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("Hématocrite (%)")
+```
+
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "hct", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = hct, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = hct - ci, ymax = hct + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+
+### Le modèle
+
+
+```{r}
+lm <- lm(hct ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction n'est pas significative. Pas de différence ni entre les traitements, ni entre genres. Mais vérifions la validité de l'ANOVA.
+
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+
+### Comparaisons par paires
+
+```{r}
+lm <- lm(hct ~ aa + sex, data = df)
+Anova(lm)
+```
+
+
+```{r}
+C1 <- glht(lm, mcp(aa = "Tukey"))$linfct
+C2 <- glht(lm, mcp(sex = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+
+## Volume corpusculaire moyen `mcv` (fL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, mcv)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = mcv, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  xlab("Dose Acacia auriculiformis") + ylab("Volume corpusculaire moyen (fL)")
+```
+
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "mcv", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = mcv, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = mcv - ci, ymax = mcv + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+
+### Identifier les valeurs aberrantes extrêmes
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(mcv)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(mcv)
+
+df_out
+```
+
+Aucune observation qui pourrait être exclue en activant le code ci-dessous :
+
+```{r}
+#df <- df %>% filter(id != 5)
+```
+
+
+
+### Le modèle
+
+
+```{r}
+lm <- lm(mcv ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction n'est pas significative. Il y a une différence dans l'effet genre. Mais vérifions la validité de l'ANOVA.
+
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+
+### Modèle à 1 facteur
+
+```{r}
+lm <- lm(mcv ~ sex, data = df)
+Anova(lm)
+```
+
+Il n'y a une différence d'effet significatif entre genre.
+
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "sex", group = TRUE))$groups %>% 
+  mutate(sex = rownames(.)) %>% 
+  dplyr::select(sex, mcv, groups) %>% 
+  as_tibble()
+cm
+```
+
+
+
+
+## Platelet `plt` (10^3/μL)
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, plt)
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  xlab("Dose Acacia auriculiformis") + ylab("Platelet (10^3/μL)")
+```
+
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "plt", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+
+### Visualisation, courbes
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = plt - ci, ymax = plt + ci), width = .1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2) +
+  xlab("Dose Acacia auriculiformis") + ylab("Platelet (10^3/μL)")
+```
+
+
+
+### Identifier les valeurs aberrantes univariées
+
+```{r}
+df_out <- df %>% 
+  group_by(aa) %>% 
+  identify_outliers(plt)
+
+df_out
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(sex) %>% 
+  identify_outliers(plt)
+
+df_out
+```
+
+On exclura les extrêmes suivant le genre et celle de aa qui ne se retrouve pas ...
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id) #c(8, 13, 15, 17, 20, 25, 35, 43))
+```
+
+### Revisualisation boxplots sans les valeurs extrèmes
+
+```{r warning = FALSE}
+ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  xlab("Dose Acacia auriculiformis") + ylab("Platelet (10^3/μL)")
+```
+
+
+
+### Revisualisation courbes sans les valeurs extrèmes
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "plt", 
+                   groupvars = c("aa", "sex"))
+df_ic
+```
+
+```{r}
+ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) + 
+  geom_errorbar(aes(ymin = plt - ci, ymax = plt + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2)
+```
+
+
+
+### Le modèle
+
+
+```{r}
+lm <- lm(sqrt(plt) ~ aa * sex, 
+         contrasts = list(aa = contr.sum, sex = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+Aucun effet détecté. Mais vérifions la validité de l'ANOVA.
+
+Malgré l'exclusion des extrêmes, aucune transformation des données n'a pu améliorer la distribution des données pour respecter les hypothèses de l'ANOVA pour rendre valide l'interprétation.
+
+Passons par la variable de groupe `aa_sex` :
+
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, plt) %>% 
+  mutate(aa_sex = interaction(aa, sex, sep = "_"))
+head(df)
+```
+
+```{r}
+df_out <- df %>% 
+  group_by(aa_sex) %>% 
+  identify_outliers(plt)
+
+df_out
+```
+
+```{r}
+df <- df %>% filter(! id %in% df_out$id)#c(17, 20 , 25, 35))
+```
+
+### Le Modèle à 1 facteur
+
+```{r}
+lm <- lm(plt ~ aa_sex, data = df)
+Anova(lm)
+```
+
+=> Pas de différence significative
+
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+
+Les hypothèses ne sont toujours pas respectées. Mais avec 1 facteur nous pouvons passer par une alternative non paramétrique.
+
+
+### Test de Krukal-Wallis
+
+Essayons peut-être le non-paramétrique.
+
+```{r}
+df <- df_copy %>% 
+  select(id, aa, sex, plt) %>% 
+  mutate(aa_sex = interaction(aa, sex, sep = "_"))
+```
+
+
+```{r}
+df %>% 
+  kruskal_test(plt ~ aa_sex)
+```
+
+=> Ce test prétend qu'il n'y a pas de différence d'effets significative entre les combinaisons Aa-Sex, sur la concentration en platelets. 
+
+```{r}
+df %>% 
+  dunn_test(plt ~ aa_sex, p.adjust.method = "bonferroni") %>% 
+  select(group1, group2, p, p.adj, p.adj.signif) #%>% 
+  #filter(p.adj.signif != "ns")
+```
+
+La normalité n'étant pas respectée, on s'entiendra ici au résultat du non paramétrique. Pas de différences.
+
+
+

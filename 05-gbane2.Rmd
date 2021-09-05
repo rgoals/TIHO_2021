@@ -1,0 +1,362 @@
+# Gbané (2021), masse de la coquille
+
+## Présentation
+
+Variable explicative :
+
+- `diet` : le régime
+
+Variable expliquée :
+
+- `shel` : la Masse de la coquille (g) 	
+
+
+```{r message = FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(Rmisc)
+library(agricolae)
+```
+
+
+## Les données
+
+```{r}
+df <- read_csv("data/degg.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(week = factor(week),
+         diet = factor(diet))
+df_copy <- df # copie
+```
+
+```{r}
+glimpse(df)
+```
+
+
+## Semaine 3
+
+```{r}
+df <- df %>% 
+  dplyr::select(id, week, diet, shel) %>% 
+  filter(week == "Week 3")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = shel)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(shel) %>% 
+  dplyr::select(id, diet, shel, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(shel ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade, certains régimes se distinguent par une différence d'effets sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra que la conclusion de l'ANOVA peut être considérée valide : => Différence d'effet significative entre certains régimes sur la masse de la coquille à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, shel, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = shel)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 2) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille - g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+## Semaine 4
+
+```{r}
+df <- df_copy %>% 
+  dplyr::select(id, week, diet, shel) %>% 
+  filter(week == "Week 4")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = shel)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(shel) %>% 
+  dplyr::select(id, diet, shel, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(shel ~ diet, data = df)
+Anova(lm)
+```
+
+=> Pas de différence d'effets significatif sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+=> Conclusion de l'ANOVA discutable : => Passons par Kruskal-Wallis (non-paramétrique) :
+
+```{r}
+df %>% 
+  kruskal_test(shel ~ diet)
+```
+
+=> Même conclusion, pas de différence d'effets significatif entre les régimes à la semaine 4 sur la masse de la coquille.
+
+```{r}
+df %>% 
+  dunn_test(shel ~ diet, p.adjust.method = "bonferroni") %>% 
+  dplyr::select(group1, group2, p, p.adj, p.adj.signif) #%>% 
+  #filter(p.adj.signif != "ns")
+```
+
+Je reconsidère les comparaisons par paires du premier ANOVA pour la visualisation.
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, shel, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = shel)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 2) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille - g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+
+## Semaine 5
+
+```{r}
+df <- df_copy %>% 
+  dplyr::select(id, week, diet, shel) %>% 
+  filter(week == "Week 5")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = shel)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(shel) %>% 
+  dplyr::select(id, diet, shel, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(shel ~ diet, data = df)
+Anova(lm)
+```
+
+=> Ici, également pas de différence d'effets significatif sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+Je passe par le non-paramétrique vu la figure précédente. 
+
+```{r}
+df %>% 
+  kruskal_test(shel ~ diet)
+```
+
+=> Même conclusion, pas de différence d'effets significatif entre les régimes à la semaine 5 sur la masse de la coquille.
+
+```{r}
+df %>% 
+  dunn_test(shel ~ diet, p.adjust.method = "bonferroni") %>% 
+  dplyr::select(group1, group2, p, p.adj, p.adj.signif) #%>% 
+  #filter(p.adj.signif != "ns")
+```
+
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, shel, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = shel)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 2) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de la coquille (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+### Évolution de la Masse de la coquille dans le temps selon les régimes
+
+```{r}
+df_ic <- summarySE(df_copy, 
+                   measurevar = "shel", 
+                   groupvars = c("week", "diet"))
+
+#write_csv(df_ic, "tab/shel_moy_temps.csv")
+df_ic
+```
+
+
+```{r}
+ggplot(df_ic, aes(x = week, y = shel, colour = diet, group = diet)) + 
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  ylab("Masse de la coquille - g") + xlab("Temps") +
+  theme_bw()
+```
+
+Figure impressionnante, mais tenir compte des valeurs de l'axe des ordonnées. Nous sommes dans le gramme en plus !
+

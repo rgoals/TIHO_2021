@@ -1,0 +1,415 @@
+# Gbané (2021), masse de l'oeuf
+
+## Présentation
+
+Essai d'alimentation de cailles avec 7 régimes différents, 3 répétitions. Mesures effectuées à 3 reprise durant 3 semaines consécutives.
+
+- 0.15%B.o_0.45%C.l
+- 0.30%B.o_0.30%C.l
+- WC
+- 0.45%B.o_0.15%C.l
+- 0.6%C.l
+- 0.6%B.o
+- YC
+
+Variable explicative :
+
+- `diet` : le régime
+
+Variable expliquée :
+
+- `egg` : la masse de l'oeuf (g) 	
+
+
+```{r message = FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(Rmisc)
+library(agricolae)
+```
+
+
+## Les données
+
+```{r}
+df <- read_csv("data/degg.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(week = factor(week),
+         diet = factor(diet))
+df_copy <- df # copie
+```
+
+```{r}
+glimpse(df)
+```
+
+
+## Semaine 3
+
+```{r}
+df <- df %>% 
+  dplyr::select(id, week, diet, egg) %>% 
+  filter(week == "Week 3")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = egg)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(egg) %>% 
+  dplyr::select(id, diet, egg, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(egg ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade certains régimes se distinguent par une différence d'effets sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra que la conclusion de l'ANOVA peut être considérée valide : => Différence d'effet significative entre certains régimes sur la masse de la coquille à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, egg, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = egg)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 15) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+
+
+## Semaine 4
+
+```{r}
+df <- df_copy %>% 
+  dplyr::select(id, week, diet, egg) %>% 
+  filter(week == "Week 4")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = egg)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(egg) %>% 
+  dplyr::select(id, diet, egg, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(egg ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade certains régimes se distinguent par une différence d'effets sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra que la conclusion de l'ANOVA peut être considérée valide : => Différence d'effet significative entre certains régimes sur la masse de la coquille à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, egg, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = egg)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 15) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+
+## Semaine 5
+
+```{r}
+df <- df_copy %>% 
+  dplyr::select(id, week, diet, egg) %>% 
+  filter(week == "Week 5")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = egg)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(egg) %>% 
+  dplyr::select(id, diet, egg, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(egg ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade certains régimes se distinguent par une différence d'effets sur la masse de la coquille. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+On retiendra que la conclusion de l'ANOVA peut être considérée valide : => Différence d'effet significative entre certains régimes sur la masse de la coquille à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  dplyr::select(diet, egg, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = egg)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 15) +
+  theme_bw() +
+  xlab("Régime") + ylab("Masse de l'oeuf (g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+### Évolution de la masse de l'oeuf dans le temps selon les régimes
+
+```{r}
+df_ic <- summarySE(df_copy, 
+                   measurevar = "egg", 
+                   groupvars = c("week", "diet"))
+
+#write_csv(df_ic, "tab/egg_moy_temps.csv")
+df_ic
+```
+
+
+```{r}
+ggplot(df_ic, aes(x = week, y = egg, colour = diet, group = diet)) + 
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  ylab("Masse de l'oeuf - g") + xlab("Temps") +
+  theme_bw()
+```
+
+Figure impressionnante, mais tenir compte des valeurs de l'axe des ordonnées. Nous sommes dans le gramme en plus !
+
+
+
+## Pourquoi j'ai opté pour une analyse univariée
+
+En associant le temps pour faire du bivarié, voici un cas où l'interaction s'avère significative.
+
+```{r}
+lm <- lm(egg ~ week * diet, 
+          contrasts = list(week = contr.sum, diet = contr.sum), 
+          data = df_copy)
+
+Anova(lm, type = 3)
+```
+
+Dans un tel cas il y a 2 alternatives pour la suite :
+
+- La première consiste à faire une ANOVA à un facteur sur la variable `grp` qui est le croisement de `week X diet`. Puis, si l’effet est significatif, des comparaisons multiples sont réalisées pour mettre en évidence les moyennes significativement différentes 2 à 2.
+
+- La seconde solution consiste à réaliser les comparaisons des moyennes relatives aux modalités d’un facteur, séparément pour chacune des modalités de l’autre facteur. Par exemple, comparer les moyennes des masses d'oeuf par type de régime, semaine par semaine.
+
+> Dans l’esprit, c’est un peu comme si on faisait une ANOVA à un facteur (qui serait le régime) et ses comparaisons multiples subséquentes (pour chaque semaine).
+>
+
+Ici avec 7 régimes et 3 semaines il y a 21 combinaisons dans la variable de groupe. L'interprétation risque d'être compliquée.
+
+Alors pourquoi ne pas partir du plus simple, au lieu de commencer par le plus compliqué et finalement être obligé de revenir au plus simple.
+
+Les conditions de l'ANOVA valide sont respectées, alors en exploitant l'alternative 1, on refait le modéle ANOVA avec le facteur de regroupement.
+
+```{r}
+df <- df_copy %>% 
+  dplyr::select(id, week, diet, egg) %>% 
+  mutate(grp = interaction(week, diet, sep = "_")) # variable de groupe
+```
+
+```{r}
+lm <- lm(egg ~ grp, data = df)
+Anova(lm)
+```
+
+=> Différences significatives
+
+#### Comparaisons par paires
+
+```{r}
+mc <- (SNK.test(lm, "grp", group = TRUE))$groups %>% 
+  mutate(grp = rownames(.)) %>% 
+  dplyr::select(grp, egg, groups) %>% 
+  as_tibble()
+mc
+```
+
+
+#### Graphe avec les comparaisons
+
+```{r}
+ggplot(mc, aes(x = grp, y = egg)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 15) +
+  theme_bw() +
+  xlab("Combinaison Week-Diet") + ylab("Masse de l'oeuf (g)") +
+  #theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups, y = 12.5), size = 4) +
+  coord_flip()
+```
+
+Il faudra éventuellement 21 bonnes tasses de café avant de pouvoir déméler les uns des autres !
+
+Il est peut-être plus parcimonieux d'aller pas à pas. Le graphique d'évolution d'une semaine à l'autre (le précédent) peut être intéressant pour intégrer les semaines.
+
+
+

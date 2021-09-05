@@ -1,0 +1,334 @@
+# Gbané (2021), Cholestérol total
+
+## Présentation
+
+Variable explicative :
+
+- `diet` : le régime
+
+Variable expliquée :
+
+- `chol_tot` : la concentration en cholestérol mg/g
+
+
+```{r message = FALSE, warning=FALSE, echo=FALSE}
+library(ggpubr)
+library(rstatix)
+library(Rmisc)
+library(agricolae)
+library(tidyverse)
+```
+
+
+## Les données
+
+```{r}
+df <- read_csv("data/degg.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(week = factor(week),
+         diet = factor(diet))
+df_copy <- df # copie
+```
+
+```{r}
+glimpse(df)
+```
+
+
+## Semaine 3
+
+```{r}
+df <- df %>% 
+  select(id, week, diet, chol_tot) %>% 
+  filter(week == "Week 3")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = chol_tot)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Concentration en cholestérol - mg/g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(chol_tot) %>% 
+  select(id, diet, chol_tot, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(log(chol_tot) ~ diet, data = df)
+Anova(lm)
+```
+
+=> Différence d'effets très significative entre certains régimes sur la concentration en cholestérol. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+=> La normalité n'était pas respectée mais la transformation log l'amélioré, confirmant la différence d'effets significative entre certains régimes sur le taux de cholestérol. 
+
+
+### Les moyennes pour comparaison
+
+```{r}
+cm1 <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.))
+colnames(cm1) <- c("chol_tot", "groups", "diet")
+cm1
+```
+
+=> Regroupement presqu'identique à celui du test non paramétrique !
+
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm1, aes(x = diet, y = chol_tot)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 5) +
+  theme_bw() +
+  xlab("Régime") + ylab("Log(concentration en cholestérol - mg/g)") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+## Semaine 4
+
+```{r}
+df <- df_copy %>% 
+  select(id, week, diet, chol_tot) %>% 
+  filter(week == "Week 4")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = chol_tot)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Concentration en cholestérol - mg/g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(chol_tot) %>% 
+  select(id, diet, chol_tot, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(chol_tot ~ diet, data = df)
+Anova(lm)
+```
+
+À ce stade, certains régimes se distinguent par une différence d'effets très significative sur la concentration en cholestérol. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+La normalité supposée respectée (à la faveur des tests). ANOVA valide.
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  select(diet, chol_tot, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = chol_tot)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 65) +
+  theme_bw() +
+  xlab("Régime") + ylab("Concentration en cholestérol - mg/g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+## Semaine 5
+
+```{r}
+df <- df_copy %>% 
+  select(id, week, diet, chol_tot) %>% 
+  filter(week == "Week 5")
+```
+
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = diet, y = chol_tot)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Régime") + ylab("Concentration en cholestérol - mg/g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1))
+```
+
+### Identification des échantillons aberrants extrêmes
+
+```{r}
+df_out <- df %>%
+  group_by(diet) %>%
+  identify_outliers(chol_tot) %>% 
+  select(id, diet, chol_tot, is.outlier, is.extreme)
+df_out
+```
+
+=>  Pas d'observation aberrante extrême
+
+```{r}
+#df <- df %>% filter(! id %in% df_out$id)
+```
+
+
+### Le modèle ANOVA
+
+```{r}
+lm <- lm(chol_tot ~ diet, data = df)
+Anova(lm)
+```
+
+=> Différence d'effets très significative sur la concentration en cholestérol entre certains régimes. Mais vérifions la validité de l'ANOVA.
+
+### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+```{r}
+levene_test(residuals(lm) ~ diet, data = df)
+```
+
+La conclusion de l'ANOVA peut être considérée valide : => Différence d'effet très significative entre certains régimes sur la concentration en cholestérol à cette date. 
+
+### Comparaisons par paires
+
+```{r}
+cm <- (SNK.test(lm, "diet", group = TRUE))$groups %>% 
+  mutate(diet = rownames(.)) %>% 
+  select(diet, chol_tot, groups) %>% 
+  as_tibble()
+cm
+```
+
+### Graphe avec les comparaisons
+
+```{r}
+ggplot(cm, aes(x = diet, y = chol_tot)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 35) +
+  theme_bw() +
+  xlab("Régime") + ylab("Concentration en cholestérol - mg/g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+### Évolution de la concentration en cholestérol dans le temps selon les régimes
+
+```{r}
+df_ic <- summarySE(df_copy, 
+                   measurevar = "chol_tot", 
+                   groupvars = c("week", "diet"))
+
+#write_csv(df_ic, "tab/chol_moy_temps.csv")
+df_ic
+```
+
+
+```{r}
+ggplot(df_ic, aes(x = week, y = chol_tot, colour = diet, group = diet)) + 
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  ylab("Concentration en cholestérol - mg/g") + xlab("Temps") +
+  theme_bw()
+```
+
+
+
+
+

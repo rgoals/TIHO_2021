@@ -1,0 +1,519 @@
+
+# Touré, 2021
+
+Variables explicatives :
+
+- `org`, pour organe
+- `ext`, pour extraction
+
+Variables expliquées :
+
+- `gae` pour mg GAE/g, => Gallic acid equivalent
+- `qe` pour mg QE/g,   => Quercetin equivalent
+- `te` pour μmol T.E/g => Trolox equivalent
+
+Comparer les effets des variables explicatives sur chacune des variables dépendantes en tenant compte de l'interaction `org * ext`.
+
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+library(ggpubr)
+library(rstatix)
+library(car)
+library(broom)
+library(GGally)
+library(Rmisc)
+library(multcomp)
+library(agricolae)
+library(tidyverse)
+```
+
+
+## Les données
+
+Les données du tableau Excel sont formatées dans un tableau csv `dorg.csv` pour R.
+
+```{r}
+df <- read_csv("data/dorg.csv")
+df <- df %>% 
+  add_column(id = 1:nrow(.), .before = 1) %>% 
+  mutate(org = factor(org),
+         ext = factor(ext))
+```
+
+```{r}
+glimpse(df)
+```
+
+
+## Gallic acid equivalent (`gae`)
+
+### Exploration visuelle, boxplots
+
+```{r warning=FALSE}
+ggplot(df, aes(x = org, y = gae, colour = ext, fill = ext)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("mg Gallic acid equivalent /g") + xlab("Organe")
+```
+
+
+### Moyennes et intervalles de confiance
+
+En considérant le regroupement (les combinaisons des 2 facteurs `org` et `ext`).
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "gae", 
+                   groupvars = c("org", "ext"))
+df_ic
+```
+
+
+### Visualisation de l'interaction éventuelle
+
+```{r}
+p <- position_dodge(0.1) # pour éviter le chevauchement éventuel des points
+
+ggplot(df_ic, aes(x = org, y = gae, colour = ext, group = ext)) + 
+  geom_errorbar(aes(ymin = gae - ci, ymax = gae + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2) +
+  ylab("mg Gallic acid equivalent /g") + xlab("Organe") +
+  theme_bw()
+```
+
+Les profils se croisent, on pourrait s’attendre à ce que l’interaction soit significative.
+
+
+### Identification des valeurs aberrantes exrêmes 
+
+```{r}
+df %>%
+  group_by(org, ext) %>% # org, # ext
+  identify_outliers(gae)
+```
+
+Les facteurs pris idividuellement ou avec interaction, aucune observation n'est identifiée comme extrême.
+
+### Le modèle
+
+```{r}
+lm <- lm(gae ~ org * ext, 
+          contrasts = list(org = contr.sum, ext = contr.sum), 
+          data = df)
+
+Anova(lm, type = 3)
+```
+
+L'effet de l'interaction est significatif. On ne devrait donc pas interpréter les effets des facteurs pris individuellement. Mais il faut d'abord vérifier les conditions de validité de l'ANOVA.
+
+
+### Vérification des hypothèses de validité
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+**Plot des résidus vs fitted values :** la valeur des résidus ne semble pas dépendre des groupes (croisements des 2 facteurs) puisqu’ils sont tous globalement centrés sur 0.
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+**Plot des résidus standardisés vs quantiles théoriques :** Cette distribution rejette l'hypothèse de normalité. Certains points sont bien éloignés de la droite. Le test de Shapiro-Wilk (ci-dessous) confirme ce rejet. Peut-être exclure les 3 points améliorerait la distribution.
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+#### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+**Plot des résidus standardisés vs valeurs prédites :** les dispersions des résidus relatives à chaque groupe (croisement des modalités des 2 facteurs) ne sont pas identiques. L’hypothèse d’homogénéité des résidus n'est aussi pas respectée. 
+
+ANOVA à 2 facteurs avec les conditions non valides : alternative => réaliser le test de **Bartlett**, ou de **Levene**, ou encore de **Fligner-Killeen** (un seul suffit !) en créant une variable de groupe `org_ext` qui est le croisement des modalités des 2 facteurs `organe` et `exctraction` :
+
+```{r}
+df <- df %>% 
+    mutate(org_ext = interaction(org, ext, sep = "_"))
+
+df %>% sample_n_by(org, ext, size = 1) # visualiser la variable de groupe
+```
+
+### L'ANOVA à 1 facteur (`org_ext`)
+
+```{r}
+lm <- lm(gae ~ org_ext, data = df)
+Anova(lm) # dans ce cas carrés de type II
+```
+
+Test de Barlett
+
+```{r}
+bartlett.test(residuals(lm) ~ df$org_ext)
+```
+
+Test de Levene
+
+```{r}
+leveneTest(residuals(lm) ~ df$org_ext)
+```
+
+Test de Fligner-Killeen
+
+```{r}
+fligner.test(residuals(lm) ~ df$org_ext)
+```
+
+Les 2 derniers tests valident l'hypothèse d'homogénéité des résidus. On va considérer ce modèle valide et que la nouvelle variable de groupe est le facteur à l'étude : **l'organe associant le mode d'extraction**.
+
+L’ANOVA à un facteur montre un effet significatif de la variable `org_ext` (croisement des modalités des facteurs `org` et `ext`). 
+
+### Comparaisons par paires
+
+Les moyennes sont ensuite comparées 2 à 2 selon l’approche de **Student - Newman - Keuls**.
+
+```{r}
+cm <- (SNK.test(lm, "org_ext", group = TRUE))$groups %>% 
+  mutate(org_ext = rownames(.)) %>% 
+  dplyr::select(org_ext, gae, groups) %>% 
+  as_tibble()
+cm
+```
+
+Il est également possible de visualiser ces comparaions multiples sur un graphe.
+
+> **Note :**
+>
+> Lorsque deux modalités partagent une même lettre, leurs différences ne sont pas significativement différentes. 
+>
+> A l’inverse, lorsque deux modalités ne partagent pas de lettres en commun, alors leurs moyennes sont significativement différentes.
+
+[On peut alors utiliser ces lettres pour les ajouter sur un graph réalisé avec ggplot2](https://delladata.fr/comparaison-de-moyennes-indiquer-les-differences-significatives-sur-le-graph).
+
+```{r}
+ggplot(cm, aes(x = org_ext, y = gae)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 16) +
+  theme_bw() +
+  xlab("Croisement des 2 modalités") + ylab("mg Gallic acid equivalent /g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+## Quercetin equivalent (`qe`)
+
+La démarche est la même.
+
+### Exploration visuelle, boxplots
+
+```{r warning=FALSE}
+ggplot(df, aes(x = org, y = qe, colour = ext, fill = ext)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
+  theme_bw() +
+  ylab("mg Quercetin equivalent /g") + xlab("Organe")
+```
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df, 
+                   measurevar = "qe", 
+                   groupvars = c("org", "ext"))
+df_ic
+```
+
+
+### Visualisation de l'interaction probable
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = org, y = qe, colour = ext, group = ext)) + 
+  geom_errorbar(aes(ymin = qe - ci, ymax = qe + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2) +
+  ylab("mg Quercetin equivalent /g") + xlab("Organe") +
+  theme_bw()
+```
+
+On s’attendrait à ce que l’interaction soit significative.
+
+
+### Identification de valeurs aberrantes exrêmes 
+
+```{r}
+df %>%
+  group_by(org, ext) %>%
+  identify_outliers(qe)
+```
+
+Aucune.
+
+
+### L'ANOVA
+
+```{r}
+lm <- lm(qe ~ org * ext, 
+          contrasts = list(org = contr.sum, ext = contr.sum), 
+          data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction ici est négligeable, mais vérifions la validité de l'anova avant les commentaires.
+
+
+### Vérification des hypothèses de validité
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+**Plot des résidus vs fitted values :** la valeur des résidus ne semble pas dépendre du groupe (croisement des modalités) puisqu’ils sont tous globalement centrés sur 0.
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+**Plot des résidus standardisés vs quantiles théoriques :** les points sont bien répartis le long de la ligne. Les résidus sont distribués selon une loi normale. Le test de Shapiro-Wilk le confirme.
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+
+#### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+**Plot des résidus standardisés vs valeurs prédites :** les dispersions des résidus relatives à chaque groupe ne sont pas identiques. L’hypothèse d’homogénéité des résidus n'est pas respectée. 
+
+Le test de Bartlett soutient cependant le contraire avec la variable de groupe. 
+
+```{r}
+bartlett.test(residuals(lm) ~ df$org_ext)
+```
+
+On choisi de supposer alors que toutes les hypothèses de validité de l'ANOVA sont satisfaites. Il faut cependant recalculer l'ANOVA sans le terme d'interaction.
+
+
+#### ANOVA sans le terme d'interaction
+
+```{r}
+lm <- lm(qe ~ org + ext, data = df)
+Anova(lm)
+```
+
+Les effets des deux facteurs sont significatifs. 
+
+- Concernant le facteur `organ`, cela signifie qu'au moins 2 moyennes diffèrent très significativement selon qu'il s'agisse de feuilles, de racines, de tronc ou de la poudre.
+
+- Concernant le facteur `extraction`, la même conclusion serait tirée s’il existait plus de 2 modalités. Dans le cas de figure ici, la moyenne avec l'extraction sous forme de décoction est significativement supérieure à celle avec l'extraction par macération :
+
+```{r}
+df %>% 
+  group_by(ext) %>% 
+  get_summary_stats(qe, type = "mean_sd")
+```
+
+#### Comparaisons multiples
+
+Le package `multcomp` permet de réaliser toutes les comparaisons en une seule fois, et donc d’ajuster les p-values de façon adéquate. 
+
+On réalise deux matrices de contrastes (C1 et C2), une pour chaque facteur, afin de définir les comparaisons souhaitées. Puis on les réunit dans une seule matrice, qui est donnée en argument à la fonction `glht()`.
+
+```{r}
+C1 <- glht(lm, mcp(org = "Tukey"))$linfct
+C2 <- glht(lm, mcp(ext = "Tukey"))$linfct
+C <- rbind(C1, C2) 
+C
+```
+
+
+```{r}
+summary(glht(lm, linfct = C))
+```
+
+
+```{r}
+par(mar = c(3, 15, 0, 3))
+plot(summary(glht(lm, linfct = C)))
+```
+
+Les résultats nous montrent que la moyenne de QE avec l'extraction sous forme de décoction est significativement supérieure à celle avec l'extraction par macération. Et que les moyennes selon les différents organes sont toutes significativement différentes deux à deux.
+
+> **Interpétez en utilisant la soustraction**
+>
+> Exemple, Poudre - Feuille, la moyenne et son intervalle de confiance entièrement à gauche de zéro, donc la moyenne de feuille est significativement plus grande que celle de Poudre.
+>
+> Tronc - Poudre se trouve du côté droit de zéro donc moyenne de Tronc > moyenne de Poudre.
+>
+> Si la différence n'était pas significative, l'intervalle de confiance autour de la moyenne croiserait la ligne verticale passant par zéro.
+
+
+## Trolox equivalent (`te`)
+
+Même démarche.
+
+### Exploration visuelle, boxplots
+
+```{r warning = FALSE}
+ggplot(df, aes(x = org, y = te, colour = ext, fill = ext)) +
+  geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.7), fatten = NULL) +
+  stat_summary(fun.y = mean, position = position_dodge(width = 0.7)) + 
+  theme_bw() +
+  ylab("μmol Trolox equivalent /g") + xlab("Organe")
+```
+
+
+### Moyennes et intervalles de confiance
+
+```{r}
+df_ic <- summarySE(df,
+                   measurevar = "te", 
+                   groupvars = c("org", "ext"))
+df_ic
+```
+
+
+### Visualisation
+
+```{r}
+p <- position_dodge(0.1)
+
+ggplot(df_ic, aes(x = org, y = te, colour = ext, group = ext)) + 
+  geom_errorbar(aes(ymin = te - ci, ymax = te + ci), width =.1, position = p) +
+  geom_line(position = p, size = 1) +
+  geom_point(position = p, size = 2) +
+  ylab("μmol Trolox equivalent /g") + xlab("Organe") +
+  theme_bw()
+```
+
+Les profils se croisent, on s’attendrait à ce que l’interaction soit significative.
+
+
+### Identification de valeurs aberrantes exrêmes 
+
+```{r}
+df %>%
+  group_by(org, ext) %>%
+  identify_outliers(te)
+```
+
+Aucune.
+
+
+### Le modèle
+
+```{r}
+lm <- lm(te ~ org * ext, 
+         contrasts = list(org = contr.sum, ext = contr.sum), 
+         data = df)
+
+Anova(lm, type = 3)
+```
+
+L'interaction est significative, mais vérifions la validité de l'anova avant tout commentaire.
+
+
+### Vérification des hypothèses de validité
+
+#### Indépendance des résidus
+
+```{r}
+plot(lm, 1)
+```
+
+**Plot des résidus vs fitted values :** la valeur des résidus ne semble pas dépendre du groupe (croisement des modalités) puisqu’ils sont tous globalement centrés sur 0.
+
+
+#### Normalité des résidus
+
+```{r}
+plot(lm, 2)
+```
+
+**Plot des résidus standardisés vs quantiles théoriques :** Trois points déforment fortement la distribution. Ils ne sont cependant pas identifiés comme extrêmes.
+
+```{r}
+shapiro_test(residuals(lm))
+```
+
+Selon ce test, on pourrait supposer que la distribution des résidus est normale.
+
+
+#### Homogénéité des variances
+
+```{r}
+plot(lm, 3)
+```
+
+**Plot des résidus standardisés vs valeurs prédites :** les dispersions des résidus relatives à chaque groupe (croisement des modalités des 2 facteurs) ne sont pas identiques. L’hypothèse d’homogénéité des résidus n'est pas respectée. 
+
+Le test de Bartlett comme les 2 autres (Levene et Fligner-Killeen) sur la variable de groupe `org_ext` (croisement des modalités des facteurs `organe` et `exctraction`), soustend leur distribution normale.
+
+```{r}
+bartlett.test(residuals(lm) ~ df$org_ext)
+```
+
+Je choisi de supposer que toutes les hypothèses de l'ANOVA sont vérifiées. On pourrait alors commenter les résultats.
+
+L'interaction étant significative, il n’est pas possible d’interpréter les effets propres des facteurs `organ` et `extraction`.
+
+Des deux alternatives qui existent, on fera une ANOVA à un facteur sur la variable `org_ext` (croisement des modalités des 2 facteurs). Puis, si l’effet est significatif, des comparaisons multiples peuvent être réalisées pour mettre en évidence les moyennes significativement différentes 2 à 2.
+
+#### Le Modèle avec le facteur de groupe
+
+```{r}
+lm <- lm(te ~ org_ext, data = df)
+Anova(lm)
+```
+
+=> Différence d'effet très significative entre certains groupes de la variable `org_ext` (croisement des modalités des facteurs `org` et `ext`). 
+
+#### Comparaisons par paires
+
+Les moyennes sont ensuite comparées 2 à 2 selon l’approche de **Student - Newman - Keuls**.
+
+```{r}
+cm <- (SNK.test(lm, "org_ext", group = TRUE))$groups %>% 
+  mutate(org_ext = rownames(.)) %>% 
+  dplyr::select(org_ext, te, groups) %>% 
+  as_tibble()
+cm
+```
+
+```{r}
+ggplot(cm, aes(x = org_ext, y = te)) + 
+  geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
+  ylim(0, 3.5) +
+  theme_bw() +
+  xlab("Croisement des 2 modalités") + ylab("μmol Trolox equivalent /g") +
+  theme(axis.text.x = element_text(angle = 45, color = "black", vjust = 1, hjust = 1)) +
+  geom_text(aes(label = groups), vjust = -0.5, size = 4)
+```
+
+
+
+
+
