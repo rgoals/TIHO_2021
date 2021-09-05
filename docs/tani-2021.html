@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Tani, 2021 | Analyse des données d’essai de nutrition de cailles</title>
+  <meta name="description" content="The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Tani, 2021 | Analyse des données d’essai de nutrition de cailles" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Tani, 2021 | Analyse des données d’essai de nutrition de cailles" />
+  
+  <meta name="twitter:description" content="The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Tiho, T." />
+
+
+<meta name="date" content="2021-09-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="touré-2021.html"/>
+<link rel="next" href="hémoglobine-hgb-gdl.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Travail demandé</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#analyse-1-touré"><i class="fa fa-check"></i><b>1.1</b> Analyse 1, Touré</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analyse-2-tani"><i class="fa fa-check"></i><b>1.2</b> Analyse 2, Tani</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#analyse-3-gbané"><i class="fa fa-check"></i><b>1.3</b> Analyse 3, Gbané</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#les-librairies"><i class="fa fa-check"></i><b>1.4</b> Les librairies</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="touré-2021.html"><a href="touré-2021.html"><i class="fa fa-check"></i><b>2</b> Touré, 2021</a><ul>
+<li class="chapter" data-level="2.1" data-path="touré-2021.html"><a href="touré-2021.html#les-données"><i class="fa fa-check"></i><b>2.1</b> Les données</a></li>
+<li class="chapter" data-level="2.2" data-path="touré-2021.html"><a href="touré-2021.html#gallic-acid-equivalent-gae"><i class="fa fa-check"></i><b>2.2</b> Gallic acid equivalent (<code>gae</code>)</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="touré-2021.html"><a href="touré-2021.html#exploration-visuelle-boxplots"><i class="fa fa-check"></i><b>2.2.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="2.2.2" data-path="touré-2021.html"><a href="touré-2021.html#moyennes-et-intervalles-de-confiance"><i class="fa fa-check"></i><b>2.2.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="2.2.3" data-path="touré-2021.html"><a href="touré-2021.html#visualisation-de-linteraction-éventuelle"><i class="fa fa-check"></i><b>2.2.3</b> Visualisation de l’interaction éventuelle</a></li>
+<li class="chapter" data-level="2.2.4" data-path="touré-2021.html"><a href="touré-2021.html#identification-des-valeurs-aberrantes-exrêmes"><i class="fa fa-check"></i><b>2.2.4</b> Identification des valeurs aberrantes exrêmes</a></li>
+<li class="chapter" data-level="2.2.5" data-path="touré-2021.html"><a href="touré-2021.html#le-modèle"><i class="fa fa-check"></i><b>2.2.5</b> Le modèle</a></li>
+<li class="chapter" data-level="2.2.6" data-path="touré-2021.html"><a href="touré-2021.html#vérification-des-hypothèses-de-validité"><i class="fa fa-check"></i><b>2.2.6</b> Vérification des hypothèses de validité</a></li>
+<li class="chapter" data-level="2.2.7" data-path="touré-2021.html"><a href="touré-2021.html#lanova-à-1-facteur-org_ext"><i class="fa fa-check"></i><b>2.2.7</b> L’ANOVA à 1 facteur (<code>org_ext</code>)</a></li>
+<li class="chapter" data-level="2.2.8" data-path="touré-2021.html"><a href="touré-2021.html#comparaisons-par-paires"><i class="fa fa-check"></i><b>2.2.8</b> Comparaisons par paires</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="touré-2021.html"><a href="touré-2021.html#quercetin-equivalent-qe"><i class="fa fa-check"></i><b>2.3</b> Quercetin equivalent (<code>qe</code>)</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="touré-2021.html"><a href="touré-2021.html#exploration-visuelle-boxplots-1"><i class="fa fa-check"></i><b>2.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="2.3.2" data-path="touré-2021.html"><a href="touré-2021.html#moyennes-et-intervalles-de-confiance-1"><i class="fa fa-check"></i><b>2.3.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="2.3.3" data-path="touré-2021.html"><a href="touré-2021.html#visualisation-de-linteraction-probable"><i class="fa fa-check"></i><b>2.3.3</b> Visualisation de l’interaction probable</a></li>
+<li class="chapter" data-level="2.3.4" data-path="touré-2021.html"><a href="touré-2021.html#identification-de-valeurs-aberrantes-exrêmes"><i class="fa fa-check"></i><b>2.3.4</b> Identification de valeurs aberrantes exrêmes</a></li>
+<li class="chapter" data-level="2.3.5" data-path="touré-2021.html"><a href="touré-2021.html#lanova"><i class="fa fa-check"></i><b>2.3.5</b> L’ANOVA</a></li>
+<li class="chapter" data-level="2.3.6" data-path="touré-2021.html"><a href="touré-2021.html#vérification-des-hypothèses-de-validité-1"><i class="fa fa-check"></i><b>2.3.6</b> Vérification des hypothèses de validité</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="touré-2021.html"><a href="touré-2021.html#trolox-equivalent-te"><i class="fa fa-check"></i><b>2.4</b> Trolox equivalent (<code>te</code>)</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="touré-2021.html"><a href="touré-2021.html#exploration-visuelle-boxplots-2"><i class="fa fa-check"></i><b>2.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="2.4.2" data-path="touré-2021.html"><a href="touré-2021.html#moyennes-et-intervalles-de-confiance-2"><i class="fa fa-check"></i><b>2.4.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="2.4.3" data-path="touré-2021.html"><a href="touré-2021.html#visualisation"><i class="fa fa-check"></i><b>2.4.3</b> Visualisation</a></li>
+<li class="chapter" data-level="2.4.4" data-path="touré-2021.html"><a href="touré-2021.html#identification-de-valeurs-aberrantes-exrêmes-1"><i class="fa fa-check"></i><b>2.4.4</b> Identification de valeurs aberrantes exrêmes</a></li>
+<li class="chapter" data-level="2.4.5" data-path="touré-2021.html"><a href="touré-2021.html#le-modèle-1"><i class="fa fa-check"></i><b>2.4.5</b> Le modèle</a></li>
+<li class="chapter" data-level="2.4.6" data-path="touré-2021.html"><a href="touré-2021.html#vérification-des-hypothèses-de-validité-2"><i class="fa fa-check"></i><b>2.4.6</b> Vérification des hypothèses de validité</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tani-2021.html"><a href="tani-2021.html"><i class="fa fa-check"></i><b>3</b> Tani, 2021</a><ul>
+<li class="chapter" data-level="3.1" data-path="tani-2021.html"><a href="tani-2021.html#les-données-1"><i class="fa fa-check"></i><b>3.1</b> Les données</a></li>
+<li class="chapter" data-level="3.2" data-path="tani-2021.html"><a href="tani-2021.html#globules-blanc-wbc103μl"><i class="fa fa-check"></i><b>3.2</b> Globules blanc <code>wbc</code>(10^3/μL)</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="tani-2021.html"><a href="tani-2021.html#exploration-visuelle-boxplots-3"><i class="fa fa-check"></i><b>3.2.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="3.2.2" data-path="tani-2021.html"><a href="tani-2021.html#identifier-les-valeurs-aberrantes-univariées"><i class="fa fa-check"></i><b>3.2.2</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="3.2.3" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-boxplots-sans-les-valeurs-extrèmes"><i class="fa fa-check"></i><b>3.2.3</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.2.4" data-path="tani-2021.html"><a href="tani-2021.html#visualisation-de-linteraction-probable-1"><i class="fa fa-check"></i><b>3.2.4</b> Visualisation de l’interaction probable</a></li>
+<li class="chapter" data-level="3.2.5" data-path="tani-2021.html"><a href="tani-2021.html#le-modèle-2"><i class="fa fa-check"></i><b>3.2.5</b> Le modèle</a></li>
+<li class="chapter" data-level="3.2.6" data-path="tani-2021.html"><a href="tani-2021.html#hypothèses-de-lanova"><i class="fa fa-check"></i><b>3.2.6</b> Hypothèses de l’ANOVA</a></li>
+<li class="chapter" data-level="3.2.7" data-path="tani-2021.html"><a href="tani-2021.html#ajustement-du-modèle-sans-le-terme-dinteraction"><i class="fa fa-check"></i><b>3.2.7</b> Ajustement du modèle sans le terme d’interaction</a></li>
+<li class="chapter" data-level="3.2.8" data-path="tani-2021.html"><a href="tani-2021.html#comparaisons-par-paires-2"><i class="fa fa-check"></i><b>3.2.8</b> Comparaisons par paires</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="tani-2021.html"><a href="tani-2021.html#lymphocytes-lym-103μl"><i class="fa fa-check"></i><b>3.3</b> Lymphocytes <code>lym</code> (10^3/μL)</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="tani-2021.html"><a href="tani-2021.html#exploration-visuelle-boxplots-4"><i class="fa fa-check"></i><b>3.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tani-2021.html"><a href="tani-2021.html#moyennes-et-intervalles-de-confiance-3"><i class="fa fa-check"></i><b>3.3.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="3.3.3" data-path="tani-2021.html"><a href="tani-2021.html#visualisation-courbes"><i class="fa fa-check"></i><b>3.3.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="3.3.4" data-path="tani-2021.html"><a href="tani-2021.html#identifier-les-valeurs-aberrantes-univariées-1"><i class="fa fa-check"></i><b>3.3.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="3.3.5" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-1"><i class="fa fa-check"></i><b>3.3.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.3.6" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-courbes-sans-les-valeurs-extrèmes"><i class="fa fa-check"></i><b>3.3.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.3.7" data-path="tani-2021.html"><a href="tani-2021.html#le-modèle-3"><i class="fa fa-check"></i><b>3.3.7</b> Le modèle</a></li>
+<li class="chapter" data-level="3.3.8" data-path="tani-2021.html"><a href="tani-2021.html#homogénéité-des-variances-4"><i class="fa fa-check"></i><b>3.3.8</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="3.3.9" data-path="tani-2021.html"><a href="tani-2021.html#comparaisons-par-paires-3"><i class="fa fa-check"></i><b>3.3.9</b> Comparaisons par paires</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tani-2021.html"><a href="tani-2021.html#granulocytes-gran-103μl"><i class="fa fa-check"></i><b>3.4</b> Granulocytes <code>gran</code> (10^3/μL)</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="tani-2021.html"><a href="tani-2021.html#exploration-visuelle-boxplots-5"><i class="fa fa-check"></i><b>3.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tani-2021.html"><a href="tani-2021.html#moyennes-et-intervalles-de-confiance-4"><i class="fa fa-check"></i><b>3.4.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tani-2021.html"><a href="tani-2021.html#visualisation-courbes-1"><i class="fa fa-check"></i><b>3.4.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tani-2021.html"><a href="tani-2021.html#identifier-les-valeurs-aberrantes-univariées-2"><i class="fa fa-check"></i><b>3.4.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="3.4.5" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-2"><i class="fa fa-check"></i><b>3.4.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.4.6" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-courbes-sans-les-valeurs-extrèmes-1"><i class="fa fa-check"></i><b>3.4.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.4.7" data-path="tani-2021.html"><a href="tani-2021.html#le-modèle-4"><i class="fa fa-check"></i><b>3.4.7</b> Le modèle</a></li>
+<li class="chapter" data-level="3.4.8" data-path="tani-2021.html"><a href="tani-2021.html#homogénéité-des-variances-5"><i class="fa fa-check"></i><b>3.4.8</b> Homogénéité des variances</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="tani-2021.html"><a href="tani-2021.html#red-blood-cell-rbc-106μl"><i class="fa fa-check"></i><b>3.5</b> Red blood cell <code>rbc</code> (10^6/μL)</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="tani-2021.html"><a href="tani-2021.html#exploration-visuelle-boxplots-6"><i class="fa fa-check"></i><b>3.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="3.5.2" data-path="tani-2021.html"><a href="tani-2021.html#moyennes-et-intervalles-de-confiance-5"><i class="fa fa-check"></i><b>3.5.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="3.5.3" data-path="tani-2021.html"><a href="tani-2021.html#visualisation-courbes-2"><i class="fa fa-check"></i><b>3.5.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="3.5.4" data-path="tani-2021.html"><a href="tani-2021.html#identifier-les-valeurs-aberrantes-univariées-3"><i class="fa fa-check"></i><b>3.5.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="3.5.5" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-3"><i class="fa fa-check"></i><b>3.5.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.5.6" data-path="tani-2021.html"><a href="tani-2021.html#revisualisation-courbes-sans-les-valeurs-extrèmes-2"><i class="fa fa-check"></i><b>3.5.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="3.5.7" data-path="tani-2021.html"><a href="tani-2021.html#anova-sans-les-outliers"><i class="fa fa-check"></i><b>3.5.7</b> ANOVA sans les outliers</a></li>
+<li class="chapter" data-level="3.5.8" data-path="tani-2021.html"><a href="tani-2021.html#homogénéité-des-variances-6"><i class="fa fa-check"></i><b>3.5.8</b> Homogénéité des variances</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html"><i class="fa fa-check"></i><b>4</b> Hémoglobine <code>hgb</code> (g/dL)</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#exploration-visuelle-boxplots-7"><i class="fa fa-check"></i><b>4.0.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="4.0.2" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#moyennes-et-intervalles-de-confiance-6"><i class="fa fa-check"></i><b>4.0.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="4.0.3" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#visualisation-courbes-3"><i class="fa fa-check"></i><b>4.0.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="4.0.4" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#identifier-les-valeurs-aberrantes-univariées-4"><i class="fa fa-check"></i><b>4.0.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="4.0.5" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-4"><i class="fa fa-check"></i><b>4.0.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.0.6" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-courbes-sans-les-valeurs-extrèmes-3"><i class="fa fa-check"></i><b>4.0.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.0.7" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#anova-sans-les-outliers-1"><i class="fa fa-check"></i><b>4.0.7</b> ANOVA sans les outliers</a></li>
+<li class="chapter" data-level="4.0.8" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#homogénéité-des-variances-7"><i class="fa fa-check"></i><b>4.0.8</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="4.0.9" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#ajustement-du-modèle-sans-le-terme-dinteraction-1"><i class="fa fa-check"></i><b>4.0.9</b> Ajustement du modèle sans le terme d’interaction</a></li>
+<li class="chapter" data-level="4.0.10" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#comparaisons-par-paires-6"><i class="fa fa-check"></i><b>4.0.10</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="4.1" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#lhématocrite-hct"><i class="fa fa-check"></i><b>4.1</b> L’hématocrite <code>hct</code> (%)</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#exploration-visuelle-boxplots-8"><i class="fa fa-check"></i><b>4.1.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="4.1.2" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#moyennes-et-intervalles-de-confiance-7"><i class="fa fa-check"></i><b>4.1.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="4.1.3" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#visualisation-courbes-4"><i class="fa fa-check"></i><b>4.1.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="4.1.4" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#identifier-les-valeurs-aberrantes-univariées-5"><i class="fa fa-check"></i><b>4.1.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="4.1.5" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-5"><i class="fa fa-check"></i><b>4.1.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.1.6" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-courbes-sans-les-valeurs-extrèmes-4"><i class="fa fa-check"></i><b>4.1.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.1.7" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#le-modèle-5"><i class="fa fa-check"></i><b>4.1.7</b> Le modèle</a></li>
+<li class="chapter" data-level="4.1.8" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#homogénéité-des-variances-8"><i class="fa fa-check"></i><b>4.1.8</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="4.1.9" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#comparaisons-par-paires-7"><i class="fa fa-check"></i><b>4.1.9</b> Comparaisons par paires</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#volume-corpusculaire-moyen-mcv-fl"><i class="fa fa-check"></i><b>4.2</b> Volume corpusculaire moyen <code>mcv</code> (fL)</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#exploration-visuelle-boxplots-9"><i class="fa fa-check"></i><b>4.2.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="4.2.2" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#moyennes-et-intervalles-de-confiance-8"><i class="fa fa-check"></i><b>4.2.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="4.2.3" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#visualisation-courbes-5"><i class="fa fa-check"></i><b>4.2.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="4.2.4" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#identifier-les-valeurs-aberrantes-extrêmes"><i class="fa fa-check"></i><b>4.2.4</b> Identifier les valeurs aberrantes extrêmes</a></li>
+<li class="chapter" data-level="4.2.5" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#le-modèle-6"><i class="fa fa-check"></i><b>4.2.5</b> Le modèle</a></li>
+<li class="chapter" data-level="4.2.6" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#homogénéité-des-variances-9"><i class="fa fa-check"></i><b>4.2.6</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="4.2.7" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#modèle-à-1-facteur"><i class="fa fa-check"></i><b>4.2.7</b> Modèle à 1 facteur</a></li>
+<li class="chapter" data-level="4.2.8" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#comparaisons-par-paires-8"><i class="fa fa-check"></i><b>4.2.8</b> Comparaisons par paires</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#platelet-plt-103μl"><i class="fa fa-check"></i><b>4.3</b> Platelet <code>plt</code> (10^3/μL)</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#exploration-visuelle-boxplots-10"><i class="fa fa-check"></i><b>4.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="4.3.2" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#moyennes-et-intervalles-de-confiance-9"><i class="fa fa-check"></i><b>4.3.2</b> Moyennes et intervalles de confiance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#visualisation-courbes-6"><i class="fa fa-check"></i><b>4.3.3</b> Visualisation, courbes</a></li>
+<li class="chapter" data-level="4.3.4" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#identifier-les-valeurs-aberrantes-univariées-6"><i class="fa fa-check"></i><b>4.3.4</b> Identifier les valeurs aberrantes univariées</a></li>
+<li class="chapter" data-level="4.3.5" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-boxplots-sans-les-valeurs-extrèmes-6"><i class="fa fa-check"></i><b>4.3.5</b> Revisualisation boxplots sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.3.6" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#revisualisation-courbes-sans-les-valeurs-extrèmes-5"><i class="fa fa-check"></i><b>4.3.6</b> Revisualisation courbes sans les valeurs extrèmes</a></li>
+<li class="chapter" data-level="4.3.7" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#le-modèle-7"><i class="fa fa-check"></i><b>4.3.7</b> Le modèle</a></li>
+<li class="chapter" data-level="4.3.8" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#le-modèle-à-1-facteur"><i class="fa fa-check"></i><b>4.3.8</b> Le Modèle à 1 facteur</a></li>
+<li class="chapter" data-level="4.3.9" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#homogénéité-des-variances-10"><i class="fa fa-check"></i><b>4.3.9</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="4.3.10" data-path="hémoglobine-hgb-gdl.html"><a href="hémoglobine-hgb-gdl.html#test-de-krukal-wallis"><i class="fa fa-check"></i><b>4.3.10</b> Test de Krukal-Wallis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html"><i class="fa fa-check"></i><b>5</b> Gbané (2021), masse de l’oeuf</a><ul>
+<li class="chapter" data-level="5.1" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#présentation"><i class="fa fa-check"></i><b>5.1</b> Présentation</a></li>
+<li class="chapter" data-level="5.2" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#les-données-2"><i class="fa fa-check"></i><b>5.2</b> Les données</a></li>
+<li class="chapter" data-level="5.3" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#semaine-3"><i class="fa fa-check"></i><b>5.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#exploration-visuelle-boxplots-11"><i class="fa fa-check"></i><b>5.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="5.3.2" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#identification-des-échantillons-aberrants-extrêmes"><i class="fa fa-check"></i><b>5.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="5.3.3" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#le-modèle-anova"><i class="fa fa-check"></i><b>5.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="5.3.4" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#normalité-des-résidus-11"><i class="fa fa-check"></i><b>5.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="5.3.5" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#homogénéité-des-variances-11"><i class="fa fa-check"></i><b>5.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="5.3.6" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#comparaisons-par-paires-9"><i class="fa fa-check"></i><b>5.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="5.3.7" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#graphe-avec-les-comparaisons"><i class="fa fa-check"></i><b>5.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#semaine-4"><i class="fa fa-check"></i><b>5.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#exploration-visuelle-boxplots-12"><i class="fa fa-check"></i><b>5.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="5.4.2" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#identification-des-échantillons-aberrants-extrêmes-1"><i class="fa fa-check"></i><b>5.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="5.4.3" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#le-modèle-anova-1"><i class="fa fa-check"></i><b>5.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="5.4.4" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#normalité-des-résidus-12"><i class="fa fa-check"></i><b>5.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="5.4.5" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#homogénéité-des-variances-12"><i class="fa fa-check"></i><b>5.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="5.4.6" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#comparaisons-par-paires-10"><i class="fa fa-check"></i><b>5.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="5.4.7" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#graphe-avec-les-comparaisons-1"><i class="fa fa-check"></i><b>5.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#semaine-5"><i class="fa fa-check"></i><b>5.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#exploration-visuelle-boxplots-13"><i class="fa fa-check"></i><b>5.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="5.5.2" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#identification-des-échantillons-aberrants-extrêmes-2"><i class="fa fa-check"></i><b>5.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="5.5.3" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#le-modèle-anova-2"><i class="fa fa-check"></i><b>5.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="5.5.4" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#normalité-des-résidus-13"><i class="fa fa-check"></i><b>5.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="5.5.5" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#homogénéité-des-variances-13"><i class="fa fa-check"></i><b>5.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="5.5.6" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#comparaisons-par-paires-11"><i class="fa fa-check"></i><b>5.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="5.5.7" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#graphe-avec-les-comparaisons-2"><i class="fa fa-check"></i><b>5.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="5.5.8" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#évolution-de-la-masse-de-loeuf-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>5.5.8</b> Évolution de la masse de l’oeuf dans le temps selon les régimes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="gbané-2021-masse-de-loeuf.html"><a href="gbané-2021-masse-de-loeuf.html#pourquoi-jai-opté-pour-une-analyse-univariée"><i class="fa fa-check"></i><b>5.6</b> Pourquoi j’ai opté pour une analyse univariée</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html"><i class="fa fa-check"></i><b>6</b> Gbané (2021), masse de la coquille</a><ul>
+<li class="chapter" data-level="6.1" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#présentation-1"><i class="fa fa-check"></i><b>6.1</b> Présentation</a></li>
+<li class="chapter" data-level="6.2" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#les-données-3"><i class="fa fa-check"></i><b>6.2</b> Les données</a></li>
+<li class="chapter" data-level="6.3" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#semaine-3-1"><i class="fa fa-check"></i><b>6.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#exploration-visuelle-boxplots-14"><i class="fa fa-check"></i><b>6.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="6.3.2" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#identification-des-échantillons-aberrants-extrêmes-3"><i class="fa fa-check"></i><b>6.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="6.3.3" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#le-modèle-anova-3"><i class="fa fa-check"></i><b>6.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="6.3.4" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#normalité-des-résidus-14"><i class="fa fa-check"></i><b>6.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="6.3.5" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#homogénéité-des-variances-14"><i class="fa fa-check"></i><b>6.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="6.3.6" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#comparaisons-par-paires-13"><i class="fa fa-check"></i><b>6.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="6.3.7" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#graphe-avec-les-comparaisons-4"><i class="fa fa-check"></i><b>6.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#semaine-4-1"><i class="fa fa-check"></i><b>6.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#exploration-visuelle-boxplots-15"><i class="fa fa-check"></i><b>6.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="6.4.2" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#identification-des-échantillons-aberrants-extrêmes-4"><i class="fa fa-check"></i><b>6.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="6.4.3" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#le-modèle-anova-4"><i class="fa fa-check"></i><b>6.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="6.4.4" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#normalité-des-résidus-15"><i class="fa fa-check"></i><b>6.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="6.4.5" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#homogénéité-des-variances-15"><i class="fa fa-check"></i><b>6.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="6.4.6" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#comparaisons-par-paires-14"><i class="fa fa-check"></i><b>6.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="6.4.7" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#graphe-avec-les-comparaisons-5"><i class="fa fa-check"></i><b>6.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#semaine-5-1"><i class="fa fa-check"></i><b>6.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#exploration-visuelle-boxplots-16"><i class="fa fa-check"></i><b>6.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="6.5.2" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#identification-des-échantillons-aberrants-extrêmes-5"><i class="fa fa-check"></i><b>6.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="6.5.3" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#le-modèle-anova-5"><i class="fa fa-check"></i><b>6.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="6.5.4" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#normalité-des-résidus-16"><i class="fa fa-check"></i><b>6.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="6.5.5" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#homogénéité-des-variances-16"><i class="fa fa-check"></i><b>6.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="6.5.6" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#comparaisons-par-paires-15"><i class="fa fa-check"></i><b>6.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="6.5.7" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#graphe-avec-les-comparaisons-6"><i class="fa fa-check"></i><b>6.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="6.5.8" data-path="gbané-2021-masse-de-la-coquille.html"><a href="gbané-2021-masse-de-la-coquille.html#évolution-de-la-masse-de-la-coquille-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>6.5.8</b> Évolution de la Masse de la coquille dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html"><i class="fa fa-check"></i><b>7</b> Gbané (2021), Masse du jaune</a><ul>
+<li class="chapter" data-level="7.1" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#présentation-2"><i class="fa fa-check"></i><b>7.1</b> Présentation</a></li>
+<li class="chapter" data-level="7.2" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#les-données-4"><i class="fa fa-check"></i><b>7.2</b> Les données</a></li>
+<li class="chapter" data-level="7.3" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#semaine-3-2"><i class="fa fa-check"></i><b>7.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#exploration-visuelle-boxplots-17"><i class="fa fa-check"></i><b>7.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="7.3.2" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#identification-des-échantillons-aberrants-extrêmes-6"><i class="fa fa-check"></i><b>7.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="7.3.3" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#le-modèle-anova-6"><i class="fa fa-check"></i><b>7.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="7.3.4" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#normalité-des-résidus-17"><i class="fa fa-check"></i><b>7.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.3.5" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#homogénéité-des-variances-17"><i class="fa fa-check"></i><b>7.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="7.3.6" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#comparaisons-par-paires-16"><i class="fa fa-check"></i><b>7.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="7.3.7" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#graphe-avec-les-comparaisons-7"><i class="fa fa-check"></i><b>7.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#semaine-4-2"><i class="fa fa-check"></i><b>7.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#exploration-visuelle-boxplots-18"><i class="fa fa-check"></i><b>7.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="7.4.2" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#identification-des-échantillons-aberrants-extrêmes-7"><i class="fa fa-check"></i><b>7.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="7.4.3" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#le-modèle-anova-7"><i class="fa fa-check"></i><b>7.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="7.4.4" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#normalité-des-résidus-18"><i class="fa fa-check"></i><b>7.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.4.5" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#homogénéité-des-variances-18"><i class="fa fa-check"></i><b>7.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="7.4.6" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#comparaisons-par-paires-17"><i class="fa fa-check"></i><b>7.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="7.4.7" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#graphe-avec-les-comparaisons-8"><i class="fa fa-check"></i><b>7.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#semaine-5-2"><i class="fa fa-check"></i><b>7.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#exploration-visuelle-boxplots-19"><i class="fa fa-check"></i><b>7.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="7.5.2" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#identification-des-échantillons-aberrants-extrêmes-8"><i class="fa fa-check"></i><b>7.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="7.5.3" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#le-modèle-anova-8"><i class="fa fa-check"></i><b>7.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="7.5.4" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#normalité-des-résidus-19"><i class="fa fa-check"></i><b>7.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="7.5.5" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#homogénéité-des-variances-19"><i class="fa fa-check"></i><b>7.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="7.5.6" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#comparaisons-par-paires-18"><i class="fa fa-check"></i><b>7.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="7.5.7" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#graphe-avec-les-comparaisons-9"><i class="fa fa-check"></i><b>7.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="7.5.8" data-path="gbané-2021-masse-du-jaune.html"><a href="gbané-2021-masse-du-jaune.html#évolution-de-la-masse-du-jaune-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>7.5.8</b> Évolution de la Masse du jaune dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html"><i class="fa fa-check"></i><b>8</b> Gbané (2021), Masse du blanc</a><ul>
+<li class="chapter" data-level="8.1" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#présentation-3"><i class="fa fa-check"></i><b>8.1</b> Présentation</a></li>
+<li class="chapter" data-level="8.2" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#les-données-5"><i class="fa fa-check"></i><b>8.2</b> Les données</a></li>
+<li class="chapter" data-level="8.3" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#semaine-3-3"><i class="fa fa-check"></i><b>8.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#exploration-visuelle-boxplots-20"><i class="fa fa-check"></i><b>8.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="8.3.2" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#identification-des-échantillons-aberrants-extrêmes-9"><i class="fa fa-check"></i><b>8.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="8.3.3" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#le-modèle-anova-9"><i class="fa fa-check"></i><b>8.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="8.3.4" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#normalité-des-résidus-20"><i class="fa fa-check"></i><b>8.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="8.3.5" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#homogénéité-des-variances-20"><i class="fa fa-check"></i><b>8.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="8.3.6" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#comparaisons-par-paires-19"><i class="fa fa-check"></i><b>8.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="8.3.7" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#graphe-avec-les-comparaisons-10"><i class="fa fa-check"></i><b>8.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#semaine-4-3"><i class="fa fa-check"></i><b>8.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#exploration-visuelle-boxplots-21"><i class="fa fa-check"></i><b>8.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="8.4.2" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#identification-des-échantillons-aberrants-extrêmes-10"><i class="fa fa-check"></i><b>8.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="8.4.3" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#le-modèle-anova-10"><i class="fa fa-check"></i><b>8.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="8.4.4" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#normalité-des-résidus-21"><i class="fa fa-check"></i><b>8.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="8.4.5" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#homogénéité-des-variances-21"><i class="fa fa-check"></i><b>8.4.5</b> Homogénéité des variances</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#semaine-5-3"><i class="fa fa-check"></i><b>8.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#exploration-visuelle-boxplots-22"><i class="fa fa-check"></i><b>8.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="8.5.2" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#identification-des-échantillons-aberrants-extrêmes-11"><i class="fa fa-check"></i><b>8.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="8.5.3" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#le-modèle-anova-11"><i class="fa fa-check"></i><b>8.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="8.5.4" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#normalité-des-résidus-22"><i class="fa fa-check"></i><b>8.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="8.5.5" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#homogénéité-des-variances-22"><i class="fa fa-check"></i><b>8.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="8.5.6" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#comparaisons-par-paires-20"><i class="fa fa-check"></i><b>8.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="8.5.7" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#graphe-avec-les-comparaisons-11"><i class="fa fa-check"></i><b>8.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="8.5.8" data-path="gbané-2021-masse-du-blanc.html"><a href="gbané-2021-masse-du-blanc.html#évolution-de-la-masse-du-blanc-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>8.5.8</b> Évolution de la Masse du blanc dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html"><i class="fa fa-check"></i><b>9</b> Gbané (2021), indice L</a><ul>
+<li class="chapter" data-level="9.1" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#présentation-4"><i class="fa fa-check"></i><b>9.1</b> Présentation</a></li>
+<li class="chapter" data-level="9.2" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#les-données-6"><i class="fa fa-check"></i><b>9.2</b> Les données</a></li>
+<li class="chapter" data-level="9.3" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#semaine-3-4"><i class="fa fa-check"></i><b>9.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#exploration-visuelle-boxplots-23"><i class="fa fa-check"></i><b>9.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="9.3.2" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#identification-des-échantillons-aberrants-extrêmes-12"><i class="fa fa-check"></i><b>9.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="9.3.3" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#le-modèle-anova-12"><i class="fa fa-check"></i><b>9.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="9.3.4" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#normalité-des-résidus-23"><i class="fa fa-check"></i><b>9.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="9.3.5" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#homogénéité-des-variances-23"><i class="fa fa-check"></i><b>9.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="9.3.6" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#comparaisons-par-paires-21"><i class="fa fa-check"></i><b>9.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="9.3.7" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#graphe-avec-les-comparaisons-12"><i class="fa fa-check"></i><b>9.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#semaine-4-4"><i class="fa fa-check"></i><b>9.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#exploration-visuelle-boxplots-24"><i class="fa fa-check"></i><b>9.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="9.4.2" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#identification-des-échantillons-aberrants-extrêmes-13"><i class="fa fa-check"></i><b>9.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="9.4.3" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#le-modèle-anova-13"><i class="fa fa-check"></i><b>9.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="9.4.4" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#normalité-des-résidus-24"><i class="fa fa-check"></i><b>9.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="9.4.5" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#homogénéité-des-variances-24"><i class="fa fa-check"></i><b>9.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="9.4.6" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#comparaisons-par-paires-22"><i class="fa fa-check"></i><b>9.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="9.4.7" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#graphe-avec-les-comparaisons-13"><i class="fa fa-check"></i><b>9.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#semaine-5-4"><i class="fa fa-check"></i><b>9.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#exploration-visuelle-boxplots-25"><i class="fa fa-check"></i><b>9.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="9.5.2" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#identification-des-échantillons-aberrants-extrêmes-14"><i class="fa fa-check"></i><b>9.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="9.5.3" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#le-modèle-anova-14"><i class="fa fa-check"></i><b>9.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="9.5.4" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#normalité-des-résidus-25"><i class="fa fa-check"></i><b>9.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="9.5.5" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#homogénéité-des-variances-25"><i class="fa fa-check"></i><b>9.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="9.5.6" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#comparaisons-par-paires-23"><i class="fa fa-check"></i><b>9.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="9.5.7" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#graphe-avec-les-comparaisons-14"><i class="fa fa-check"></i><b>9.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="9.5.8" data-path="gbané-2021-indice-l.html"><a href="gbané-2021-indice-l.html#évolution-de-lindice-l-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>9.5.8</b> Évolution de l’indice L dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html"><i class="fa fa-check"></i><b>10</b> Gbané (2021), indice A</a><ul>
+<li class="chapter" data-level="10.1" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#présentation-5"><i class="fa fa-check"></i><b>10.1</b> Présentation</a></li>
+<li class="chapter" data-level="10.2" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#les-données-7"><i class="fa fa-check"></i><b>10.2</b> Les données</a></li>
+<li class="chapter" data-level="10.3" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#semaine-3-5"><i class="fa fa-check"></i><b>10.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#exploration-visuelle-boxplots-26"><i class="fa fa-check"></i><b>10.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="10.3.2" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#identification-des-échantillons-aberrants-extrêmes-15"><i class="fa fa-check"></i><b>10.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="10.3.3" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#le-modèle-anova-15"><i class="fa fa-check"></i><b>10.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="10.3.4" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#normalité-des-résidus-26"><i class="fa fa-check"></i><b>10.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="10.3.5" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#homogénéité-des-variances-26"><i class="fa fa-check"></i><b>10.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="10.3.6" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#comparaisons-par-paires-24"><i class="fa fa-check"></i><b>10.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="10.3.7" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#graphe-avec-les-comparaisons-15"><i class="fa fa-check"></i><b>10.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#semaine-4-5"><i class="fa fa-check"></i><b>10.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#exploration-visuelle-boxplots-27"><i class="fa fa-check"></i><b>10.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="10.4.2" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#identification-des-échantillons-aberrants-extrêmes-16"><i class="fa fa-check"></i><b>10.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="10.4.3" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#le-modèle-anova-16"><i class="fa fa-check"></i><b>10.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="10.4.4" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#normalité-des-résidus-27"><i class="fa fa-check"></i><b>10.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="10.4.5" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#homogénéité-des-variances-27"><i class="fa fa-check"></i><b>10.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="10.4.6" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#comparaisons-par-paires-25"><i class="fa fa-check"></i><b>10.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="10.4.7" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#graphe-avec-les-comparaisons-16"><i class="fa fa-check"></i><b>10.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#semaine-5-5"><i class="fa fa-check"></i><b>10.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#exploration-visuelle-boxplots-28"><i class="fa fa-check"></i><b>10.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="10.5.2" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#identification-des-échantillons-aberrants-extrêmes-17"><i class="fa fa-check"></i><b>10.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="10.5.3" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#le-modèle-anova-17"><i class="fa fa-check"></i><b>10.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="10.5.4" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#normalité-des-résidus-28"><i class="fa fa-check"></i><b>10.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="10.5.5" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#homogénéité-des-variances-28"><i class="fa fa-check"></i><b>10.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="10.5.6" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#comparaisons-par-paires-26"><i class="fa fa-check"></i><b>10.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="10.5.7" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#graphe-avec-les-comparaisons-17"><i class="fa fa-check"></i><b>10.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="10.5.8" data-path="gbané-2021-indice-a.html"><a href="gbané-2021-indice-a.html#évolution-de-lindice-a-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>10.5.8</b> Évolution de l’indice A dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html"><i class="fa fa-check"></i><b>11</b> Gbané (2021), Indice B</a><ul>
+<li class="chapter" data-level="11.1" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#présentation-6"><i class="fa fa-check"></i><b>11.1</b> Présentation</a></li>
+<li class="chapter" data-level="11.2" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#les-données-8"><i class="fa fa-check"></i><b>11.2</b> Les données</a></li>
+<li class="chapter" data-level="11.3" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#semaine-3-6"><i class="fa fa-check"></i><b>11.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#exploration-visuelle-boxplots-29"><i class="fa fa-check"></i><b>11.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="11.3.2" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#identification-des-échantillons-aberrants-extrêmes-18"><i class="fa fa-check"></i><b>11.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="11.3.3" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#le-modèle-anova-18"><i class="fa fa-check"></i><b>11.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="11.3.4" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#normalité-des-résidus-29"><i class="fa fa-check"></i><b>11.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="11.3.5" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#homogénéité-des-variances-29"><i class="fa fa-check"></i><b>11.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="11.3.6" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#comparaisons-par-paires-27"><i class="fa fa-check"></i><b>11.3.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="11.3.7" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#graphe-avec-les-comparaisons-18"><i class="fa fa-check"></i><b>11.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#semaine-4-6"><i class="fa fa-check"></i><b>11.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#exploration-visuelle-boxplots-30"><i class="fa fa-check"></i><b>11.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="11.4.2" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#identification-des-échantillons-aberrants-extrêmes-19"><i class="fa fa-check"></i><b>11.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="11.4.3" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#le-modèle-anova-19"><i class="fa fa-check"></i><b>11.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="11.4.4" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#normalité-des-résidus-30"><i class="fa fa-check"></i><b>11.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="11.4.5" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#homogénéité-des-variances-30"><i class="fa fa-check"></i><b>11.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="11.4.6" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#comparaisons-par-paires-28"><i class="fa fa-check"></i><b>11.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="11.4.7" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#graphe-avec-les-comparaisons-19"><i class="fa fa-check"></i><b>11.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#semaine-5-6"><i class="fa fa-check"></i><b>11.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#exploration-visuelle-boxplots-31"><i class="fa fa-check"></i><b>11.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="11.5.2" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#identification-des-échantillons-aberrants-extrêmes-20"><i class="fa fa-check"></i><b>11.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="11.5.3" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#le-modèle-anova-20"><i class="fa fa-check"></i><b>11.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="11.5.4" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#normalité-des-résidus-31"><i class="fa fa-check"></i><b>11.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="11.5.5" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#homogénéité-des-variances-31"><i class="fa fa-check"></i><b>11.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="11.5.6" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#comparaisons-par-paires-29"><i class="fa fa-check"></i><b>11.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="11.5.7" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#graphe-avec-les-comparaisons-20"><i class="fa fa-check"></i><b>11.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="11.5.8" data-path="gbané-2021-indice-b.html"><a href="gbané-2021-indice-b.html#évolution-de-lindice-b-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>11.5.8</b> Évolution de l’Indice B dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html"><i class="fa fa-check"></i><b>12</b> Gbané (2021), Cholestérol total</a><ul>
+<li class="chapter" data-level="12.1" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#présentation-7"><i class="fa fa-check"></i><b>12.1</b> Présentation</a></li>
+<li class="chapter" data-level="12.2" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#les-données-9"><i class="fa fa-check"></i><b>12.2</b> Les données</a></li>
+<li class="chapter" data-level="12.3" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#semaine-3-7"><i class="fa fa-check"></i><b>12.3</b> Semaine 3</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#exploration-visuelle-boxplots-32"><i class="fa fa-check"></i><b>12.3.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="12.3.2" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#identification-des-échantillons-aberrants-extrêmes-21"><i class="fa fa-check"></i><b>12.3.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="12.3.3" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#le-modèle-anova-21"><i class="fa fa-check"></i><b>12.3.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="12.3.4" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#normalité-des-résidus-32"><i class="fa fa-check"></i><b>12.3.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="12.3.5" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#homogénéité-des-variances-32"><i class="fa fa-check"></i><b>12.3.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="12.3.6" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#les-moyennes-pour-comparaison"><i class="fa fa-check"></i><b>12.3.6</b> Les moyennes pour comparaison</a></li>
+<li class="chapter" data-level="12.3.7" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#graphe-avec-les-comparaisons-21"><i class="fa fa-check"></i><b>12.3.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#semaine-4-7"><i class="fa fa-check"></i><b>12.4</b> Semaine 4</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#exploration-visuelle-boxplots-33"><i class="fa fa-check"></i><b>12.4.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="12.4.2" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#identification-des-échantillons-aberrants-extrêmes-22"><i class="fa fa-check"></i><b>12.4.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="12.4.3" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#le-modèle-anova-22"><i class="fa fa-check"></i><b>12.4.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="12.4.4" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#normalité-des-résidus-33"><i class="fa fa-check"></i><b>12.4.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="12.4.5" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#homogénéité-des-variances-33"><i class="fa fa-check"></i><b>12.4.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="12.4.6" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#comparaisons-par-paires-30"><i class="fa fa-check"></i><b>12.4.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="12.4.7" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#graphe-avec-les-comparaisons-22"><i class="fa fa-check"></i><b>12.4.7</b> Graphe avec les comparaisons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#semaine-5-7"><i class="fa fa-check"></i><b>12.5</b> Semaine 5</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#exploration-visuelle-boxplots-34"><i class="fa fa-check"></i><b>12.5.1</b> Exploration visuelle, boxplots</a></li>
+<li class="chapter" data-level="12.5.2" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#identification-des-échantillons-aberrants-extrêmes-23"><i class="fa fa-check"></i><b>12.5.2</b> Identification des échantillons aberrants extrêmes</a></li>
+<li class="chapter" data-level="12.5.3" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#le-modèle-anova-23"><i class="fa fa-check"></i><b>12.5.3</b> Le modèle ANOVA</a></li>
+<li class="chapter" data-level="12.5.4" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#normalité-des-résidus-34"><i class="fa fa-check"></i><b>12.5.4</b> Normalité des résidus</a></li>
+<li class="chapter" data-level="12.5.5" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#homogénéité-des-variances-34"><i class="fa fa-check"></i><b>12.5.5</b> Homogénéité des variances</a></li>
+<li class="chapter" data-level="12.5.6" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#comparaisons-par-paires-31"><i class="fa fa-check"></i><b>12.5.6</b> Comparaisons par paires</a></li>
+<li class="chapter" data-level="12.5.7" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#graphe-avec-les-comparaisons-23"><i class="fa fa-check"></i><b>12.5.7</b> Graphe avec les comparaisons</a></li>
+<li class="chapter" data-level="12.5.8" data-path="gbané-2021-cholestérol-total.html"><a href="gbané-2021-cholestérol-total.html#évolution-de-la-concentration-en-cholestérol-dans-le-temps-selon-les-régimes"><i class="fa fa-check"></i><b>12.5.8</b> Évolution de la concentration en cholestérol dans le temps selon les régimes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analyse des données d’essai de nutrition de cailles</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tani-2021" class="section level1">
+<h1><span class="header-section-number">Chapitre 3</span> Tani, 2021</h1>
+<p>Variables explicatives :</p>
+<ul>
+<li><code>aa</code> : Acacia auriculiformis</li>
+<li><code>sex</code> : sexe</li>
+</ul>
+<p>Variables expliquées :</p>
+<ul>
+<li><code>wbc</code> : White blood cell (10^3/μL)</li>
+<li><code>lym</code> : Lymphocytes (10^3/μL)</li>
+<li><code>gran</code> : Granulocytes (10^3/μL)</li>
+<li><code>rbc</code> : Red blood cell (10^6/μL)</li>
+<li><code>hgb</code> : Hémoglobine (g/dL)</li>
+<li><code>hct</code> : Hématocrite (%)</li>
+<li><code>mcv</code> : Mean corpuscular volume (fL)</li>
+<li><code>plt</code> : Platelet (10^3/μL)</li>
+</ul>
+<p>Comparer les effets des valiables explicatives sur les variables dépendantes prises individuellement, en tenant compte de l’interaction <code>A.a * Sex</code>.</p>
+<div id="les-données-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Les données</h2>
+<p>Les données du fichier excel sont formatées en tableau <code>dnfs.csv</code> pour R.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/dnfs.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   aa = col_double(),
+##   sex = col_character(),
+##   wbc = col_double(),
+##   lym = col_double(),
+##   gran = col_double(),
+##   lym_pc = col_double(),
+##   gran_pc = col_double(),
+##   rbc = col_double(),
+##   hgb = col_double(),
+##   hct = col_double(),
+##   mcv = col_double(),
+##   plt = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">add_column</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.), <span class="dt">.before =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aa =</span> <span class="kw">factor</span>(aa),</a>
+<a class="sourceLine" id="cb3-4" title="4">         <span class="dt">sex =</span> <span class="kw">factor</span>(sex))</a>
+<a class="sourceLine" id="cb3-5" title="5">df_copy &lt;-<span class="st"> </span>df</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">glimpse</span>(df)</a></code></pre></div>
+<pre><code>## Rows: 50
+## Columns: 13
+## $ id      &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,~
+## $ aa      &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.25, 0.25, 0.25,~
+## $ sex     &lt;fct&gt; M, M, M, M, M, M, M, M, F, F, F, F, F, F, F, M, M, M, M, M, F,~
+## $ wbc     &lt;dbl&gt; 30.80, 30.46, 45.30, 46.21, 50.32, 46.51, 36.08, 42.74, 43.48,~
+## $ lym     &lt;dbl&gt; 26.55, 28.68, 34.38, 35.49, 42.82, 29.25, 30.38, 32.44, 36.70,~
+## $ gran    &lt;dbl&gt; 3.75, 3.51, 9.29, 9.20, 6.39, 14.61, 5.09, 8.72, 5.78, 4.67, 5~
+## $ lym_pc  &lt;dbl&gt; 86.20, 87.60, 75.90, 76.80, 85.10, 62.90, 84.20, 75.90, 84.40,~
+## $ gran_pc &lt;dbl&gt; 12.10, 11.50, 20.50, 19.90, 12.70, 31.40, 14.10, 20.40, 13.30,~
+## $ rbc     &lt;dbl&gt; 2.11, 2.14, 2.30, 2.31, 2.27, 2.29, 2.12, 2.33, 2.75, 2.70, 2.~
+## $ hgb     &lt;dbl&gt; 10.00, 10.30, 11.30, 11.50, 11.50, 10.60, 10.10, 10.90, 12.90,~
+## $ hct     &lt;dbl&gt; 28.3, 30.9, 31.8, 32.2, 34.1, 30.0, 28.4, 31.4, 36.5, 37.9, 31~
+## $ mcv     &lt;dbl&gt; 134.1, 144.1, 138.2, 139.5, 149.8, 130.9, 134.0, 134.7, 133.1,~
+## $ plt     &lt;dbl&gt; 11.60, 9.00, 10.30, 10.10, 5.00, 11.30, 10.60, 0.00, 10.20, 15~</code></pre>
+</div>
+<div id="globules-blanc-wbc103μl" class="section level2">
+<h2><span class="header-section-number">3.2</span> Globules blanc <code>wbc</code>(10^3/μL)</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">select</span>(id, aa, sex, wbc)</a></code></pre></div>
+<div id="exploration-visuelle-boxplots-3" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Exploration visuelle, boxplots</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> wbc, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;White blood cell (10^3/μL)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Dose Acacia auriculiformis&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="identifier-les-valeurs-aberrantes-univariées" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Identifier les valeurs aberrantes univariées</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(aa) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(wbc)</a>
+<a class="sourceLine" id="cb8-4" title="4">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 6
+##   aa       id sex     wbc is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 0        13 F      87.4 TRUE       TRUE      
+## 2 0.25     18 M      90.0 TRUE       TRUE      
+## 3 0.5      26 M      90.7 TRUE       TRUE      
+## 4 0.5      39 F      71.8 TRUE       TRUE</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(wbc)</a>
+<a class="sourceLine" id="cb10-4" title="4">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 6
+##   sex      id aa      wbc is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 F        13 0      87.4 TRUE       TRUE      
+## 2 F        39 0.5    71.8 TRUE       TRUE      
+## 3 M        18 0.25   90.0 TRUE       TRUE      
+## 4 M        26 0.5    90.7 TRUE       TRUE</code></pre>
+<p>Pure coincidence peut-être, ce sont les mêmes pour les 2 facteurs ! On pourrait choisir de les ignorer pour la suite en activant le code suivant. Je le ferai si jamais ceci améliorait la distribution des données.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="st"> </span>id <span class="op">%in%</span><span class="st"> </span>df_out<span class="op">$</span>id)</a></code></pre></div>
+<p>Les 4 observations désignées comme étant extrêmes ont été écartées.</p>
+</div>
+<div id="revisualisation-boxplots-sans-les-valeurs-extrèmes" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Revisualisation boxplots sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> wbc, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;White blood cell (10^3/μL)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Dose Acacia auriculiformis&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="visualisation-de-linteraction-probable-1" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Visualisation de l’interaction probable</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df,</a>
+<a class="sourceLine" id="cb14-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;wbc&quot;</span>, </a>
+<a class="sourceLine" id="cb14-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb14-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N      wbc       sd       se       ci
+## 1    0   F 6 39.33833 4.246652 1.733689 4.456588
+## 2    0   M 8 41.05250 7.608268 2.689929 6.360671
+## 3 0.25   F 5 35.55800 4.320598 1.932230 5.364731
+## 4 0.25   M 4 35.73750 2.901108 1.450554 4.616309
+## 5  0.5   F 6 39.08333 6.408344 2.616195 6.725144
+## 6  0.5   M 7 40.38143 4.738848 1.791116 4.382703
+## 7 0.75   F 6 38.07333 5.502275 2.246294 5.774283
+## 8 0.75   M 4 37.41000 5.480706 2.740353 8.721026</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">p &lt;-<span class="st"> </span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> wbc, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> wbc <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> wbc <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;White blood cell (10^3/μL)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Dose Acacia auriculiformis&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Sans les outliers, la distribution semble similaire chez les mâles comme chez les femmelles. Avec ces intervalles de confiance, il serait peu probable de trouver des différences significatives …</p>
+</div>
+<div id="le-modèle-2" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Le modèle</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(wbc <span class="op">~</span><span class="st"> </span>aa <span class="op">*</span><span class="st"> </span>sex, </a>
+<a class="sourceLine" id="cb17-2" title="2">         <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">aa =</span> contr.sum, <span class="dt">sex =</span> contr.sum), </a>
+<a class="sourceLine" id="cb17-3" title="3">         <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb17-4" title="4"></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="kw">Anova</span>(lm, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: wbc
+##             Sum Sq Df   F value Pr(&gt;F)    
+## (Intercept)  64056  1 2068.3264 &lt;2e-16 ***
+## aa             136  3    1.4631 0.2399    
+## sex              4  1    0.1406 0.7097    
+## aa:sex          10  3    0.1040 0.9572    
+## Residuals     1177 38                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>L’interaction n’est pas significative, les effets des facteurs pris individuellement également. Mais vérifions la validité de l’anaova.</p>
+</div>
+<div id="hypothèses-de-lanova" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> Hypothèses de l’ANOVA</h3>
+<div id="indépendance-des-résidus-3" class="section level4">
+<h4><span class="header-section-number">3.2.6.1</span> Indépendance des résidus</h4>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><strong>Plot des résidus vs fitted values :</strong> Les résidus semblent tous globalement centrés sur 0. Hypothèse valide.</p>
+</div>
+<div id="normalité-des-résidus-3" class="section level4">
+<h4><span class="header-section-number">3.2.6.2</span> Normalité des résidus</h4>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><strong>Plot des résidus standardisés vs quantiles théoriques :</strong></p>
+<p>Les points semblent bien répartis le long de la ligne. Les résidus peuvent être considérés comme distribués selon une loi normale.</p>
+<p>Aussi le test de normalité de Shapiro-Wilk :</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">shapiro_test</span>(<span class="kw">residuals</span>(lm))</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   variable      statistic p.value
+##   &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;
+## 1 residuals(lm)     0.978   0.518</code></pre>
+</div>
+<div id="homogénéité-des-variances-3" class="section level4">
+<h4><span class="header-section-number">3.2.6.3</span> Homogénéité des variances</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><strong>Plot des résidus standardisés vs valeurs prédites :</strong></p>
+<p>Les dispersions des résidus (leurs écartements verticaux) relatives à chaque groupe (croisement des modalités des 2 facteurs) sont globalement identiques, l’hypothèse d’homogénéité des résidus peut être acceptée.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw">plot</span>(lm)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ajustement-du-modèle-sans-le-terme-dinteraction" class="section level3">
+<h3><span class="header-section-number">3.2.7</span> Ajustement du modèle sans le terme d’interaction</h3>
+<p>L’interaction n’étant pas significative, <strong>Avant d’interpréter les résultats, on va ajuster à nouveau le modèle de l’ANOVA à deux facteurs, mais sans le terme d’interaction</strong>.</p>
+<p>Lorsque le modèle ne contient pas de terme d’interaction, on utilise les carrés de type II. Pour cela, il suffit simplement d’utiliser les contrastes par défaut qui sont de type <code>contr.treatment</code> (donc ne pas les modifier dans le code).</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(wbc <span class="op">~</span><span class="st"> </span>aa <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">Anova</span>(lm)</a></code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: wbc
+##            Sum Sq Df F value Pr(&gt;F)
+## aa         135.46  3  1.5602 0.2136
+## sex          6.99  1  0.2414 0.6258
+## Residuals 1186.51 41</code></pre>
+<p>Il n’y aurait pas de différence d’effet significatif entre les doses <code>Aa</code> ou suivant le <code>sexe</code>.</p>
+</div>
+<div id="comparaisons-par-paires-2" class="section level3">
+<h3><span class="header-section-number">3.2.8</span> Comparaisons par paires</h3>
+<p>Les moyennes sont ensuite comparées 2 à 2 selon l’approche des Contrastes de Tukey, fonction <code>glht()</code>, package <code>multcomp</code>.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">C1 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">aa =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb27-2" title="2">C2 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">sex =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb27-3" title="3">C &lt;-<span class="st"> </span><span class="kw">rbind</span>(C1, C2) </a>
+<a class="sourceLine" id="cb27-4" title="4">C</a></code></pre></div>
+<pre><code>##             (Intercept) aa0.25 aa0.5 aa0.75 sexM
+## 0.25 - 0              0      1     0      0    0
+## 0.5 - 0               0      0     1      0    0
+## 0.75 - 0              0      0     0      1    0
+## 0.5 - 0.25            0     -1     1      0    0
+## 0.75 - 0.25           0     -1     0      1    0
+## 0.75 - 0.5            0      0    -1      1    0
+## M - F                 0      0     0      0    1</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C))</a></code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: lm(formula = wbc ~ aa + sex, data = df)
+## 
+## Linear Hypotheses:
+##                  Estimate Std. Error t value Pr(&gt;|t|)
+## 0.25 - 0 == 0     -4.5802     2.3074  -1.985    0.249
+## 0.5 - 0 == 0      -0.5096     2.0727  -0.246    0.999
+## 0.75 - 0 == 0     -2.3750     2.2442  -1.058    0.795
+## 0.5 - 0.25 == 0    4.0705     2.3376   1.741    0.372
+## 0.75 - 0.25 == 0   2.2052     2.4727   0.892    0.877
+## 0.75 - 0.5 == 0   -1.8653     2.2736  -0.820    0.906
+## M - F == 0         0.7869     1.6016   0.491    0.985
+## (Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">plot</span>(<span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C)))</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+</div>
+<div id="lymphocytes-lym-103μl" class="section level2">
+<h2><span class="header-section-number">3.3</span> Lymphocytes <code>lym</code> (10^3/μL)</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">df &lt;-<span class="st"> </span>df_copy <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="st">  </span><span class="kw">select</span>(id, aa, sex, lym)</a></code></pre></div>
+<div id="exploration-visuelle-boxplots-4" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Exploration visuelle, boxplots</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> lym, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Lymphocytes (10^3/μL)&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>La distribution semble similaire à celle de la variable précédente.</p>
+</div>
+<div id="moyennes-et-intervalles-de-confiance-3" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Moyennes et intervalles de confiance</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df, </a>
+<a class="sourceLine" id="cb34-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;lym&quot;</span>, </a>
+<a class="sourceLine" id="cb34-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb34-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N      lym        sd        se        ci
+## 1    0   F 7 39.86857 16.777861  6.341435 15.516933
+## 2    0   M 8 32.49875  5.127409  1.812813  4.286622
+## 3 0.25   F 5 30.31600  3.752497  1.678167  4.659340
+## 4 0.25   M 5 41.30600 23.609447 10.558466 29.315000
+## 5  0.5   F 7 36.94857 13.479475  5.094763 12.466435
+## 6  0.5   M 8 40.21375 17.120058  6.052855 14.312727
+## 7 0.75   F 6 32.28500  5.067326  2.068727  5.317832
+## 8 0.75   M 4 31.94500  5.452880  2.726440  8.676749</code></pre>
+</div>
+<div id="visualisation-courbes" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Visualisation, courbes</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">p &lt;-<span class="st"> </span><span class="kw">position_dodge</span>(<span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb36-2" title="2"></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> lym, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lym <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> lym <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Une interaction semble évidente ici …</p>
+</div>
+<div id="identifier-les-valeurs-aberrantes-univariées-1" class="section level3">
+<h3><span class="header-section-number">3.3.4</span> Identifier les valeurs aberrantes univariées</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(aa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(lym)</a>
+<a class="sourceLine" id="cb37-4" title="4"></a>
+<a class="sourceLine" id="cb37-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 6
+##   aa       id sex     lym is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 0        13 F      77.3 TRUE       TRUE      
+## 2 0.25     18 M      83.4 TRUE       TRUE      
+## 3 0.5      26 M      81.3 TRUE       TRUE      
+## 4 0.5      39 F      63.9 TRUE       FALSE</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(lym)</a>
+<a class="sourceLine" id="cb39-4" title="4"></a>
+<a class="sourceLine" id="cb39-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 6
+##   sex      id aa      lym is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 F        13 0      77.3 TRUE       TRUE      
+## 2 F        39 0.5    63.9 TRUE       TRUE      
+## 3 M        18 0.25   83.4 TRUE       TRUE      
+## 4 M        26 0.5    81.3 TRUE       TRUE</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="st"> </span>id <span class="op">%in%</span><span class="st"> </span>df_out<span class="op">$</span>id)</a></code></pre></div>
+</div>
+<div id="revisualisation-boxplots-sans-les-valeurs-extrèmes-1" class="section level3">
+<h3><span class="header-section-number">3.3.5</span> Revisualisation boxplots sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> lym, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;LYM&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="revisualisation-courbes-sans-les-valeurs-extrèmes" class="section level3">
+<h3><span class="header-section-number">3.3.6</span> Revisualisation courbes sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df,</a>
+<a class="sourceLine" id="cb43-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;lym&quot;</span>, </a>
+<a class="sourceLine" id="cb43-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb43-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N      lym       sd       se       ci
+## 1    0   F 6 33.63000 3.296944 1.345972 3.459931
+## 2    0   M 8 32.49875 5.127409 1.812813 4.286622
+## 3 0.25   F 5 30.31600 3.752497 1.678167 4.659340
+## 4 0.25   M 4 30.79000 2.442594 1.221297 3.886713
+## 5  0.5   F 6 32.45167 6.940419 2.833414 7.283523
+## 6  0.5   M 7 34.34429 4.517384 1.707411 4.177884
+## 7 0.75   F 6 32.28500 5.067326 2.068727 5.317832
+## 8 0.75   M 4 31.94500 5.452880 2.726440 8.676749</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> lym, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lym <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> lym <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Sans les outliers, la distribution semble identique chez les mâles et les femmelles. …</p>
+</div>
+<div id="le-modèle-3" class="section level3">
+<h3><span class="header-section-number">3.3.7</span> Le modèle</h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(lym <span class="op">~</span><span class="st"> </span>aa <span class="op">*</span><span class="st"> </span>sex, </a>
+<a class="sourceLine" id="cb46-2" title="2">         <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">aa =</span> contr.sum, <span class="dt">sex =</span> contr.sum), </a>
+<a class="sourceLine" id="cb46-3" title="3">         <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb46-4" title="4"></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="kw">Anova</span>(lm, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: lym
+##             Sum Sq Df   F value Pr(&gt;F)    
+## (Intercept)  45439  1 1932.5464 &lt;2e-16 ***
+## aa              50  3    0.7067 0.5540    
+## sex              1  1    0.0232 0.8797    
+## aa:sex          16  3    0.2296 0.8752    
+## Residuals      893 38                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Les différences ne sont pas significatives. Mais vérifions la validité de l’ANOVA.</p>
+<div id="indépendance-des-résidus-4" class="section level4">
+<h4><span class="header-section-number">3.3.7.1</span> Indépendance des résidus</h4>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+</div>
+<div id="normalité-des-résidus-4" class="section level4">
+<h4><span class="header-section-number">3.3.7.2</span> Normalité des résidus</h4>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+</div>
+<div id="homogénéité-des-variances-4" class="section level3">
+<h3><span class="header-section-number">3.3.8</span> Homogénéité des variances</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+<div id="comparaisons-par-paires-3" class="section level3">
+<h3><span class="header-section-number">3.3.9</span> Comparaisons par paires</h3>
+<p>Contrastes de Tukey, fonction <code>glht()</code>, package <code>multcomp</code>.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(lym <span class="op">~</span><span class="st"> </span>aa <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">Anova</span>(lm)</a></code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: lym
+##           Sum Sq Df F value Pr(&gt;F)
+## aa         50.28  3  0.7554 0.5256
+## sex         0.54  1  0.0244 0.8765
+## Residuals 909.68 41</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">C1 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">aa =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb53-2" title="2">C2 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">sex =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb53-3" title="3">C &lt;-<span class="st"> </span><span class="kw">rbind</span>(C1, C2) </a>
+<a class="sourceLine" id="cb53-4" title="4">C</a></code></pre></div>
+<pre><code>##             (Intercept) aa0.25 aa0.5 aa0.75 sexM
+## 0.25 - 0              0      1     0      0    0
+## 0.5 - 0               0      0     1      0    0
+## 0.75 - 0              0      0     0      1    0
+## 0.5 - 0.25            0     -1     1      0    0
+## 0.75 - 0.25           0     -1     0      1    0
+## 0.75 - 0.5            0      0    -1      1    0
+## M - F                 0      0     0      0    1</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C))</a></code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: lm(formula = lym ~ aa + sex, data = df)
+## 
+## Linear Hypotheses:
+##                  Estimate Std. Error t value Pr(&gt;|t|)
+## 0.25 - 0 == 0     -2.4291     2.0203  -1.202    0.711
+## 0.5 - 0 == 0       0.4944     1.8148   0.272    0.998
+## 0.75 - 0 == 0     -0.7970     1.9650  -0.406    0.993
+## 0.5 - 0.25 == 0    2.9235     2.0468   1.428    0.565
+## 0.75 - 0.25 == 0   1.6321     2.1651   0.754    0.929
+## 0.75 - 0.5 == 0   -1.2914     1.9908  -0.649    0.958
+## M - F == 0         0.2192     1.4024   0.156    1.000
+## (Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">plot</span>(<span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C)))</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+</div>
+<div id="granulocytes-gran-103μl" class="section level2">
+<h2><span class="header-section-number">3.4</span> Granulocytes <code>gran</code> (10^3/μL)</h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">df &lt;-<span class="st"> </span>df_copy <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">select</span>(id, aa, sex, gran)</a></code></pre></div>
+<div id="exploration-visuelle-boxplots-5" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Exploration visuelle, boxplots</h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> gran, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Granulocytes (10^3/μL)&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+</div>
+<div id="moyennes-et-intervalles-de-confiance-4" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Moyennes et intervalles de confiance</h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df, </a>
+<a class="sourceLine" id="cb60-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;gran&quot;</span>, </a>
+<a class="sourceLine" id="cb60-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb60-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N     gran        sd        se        ci
+## 1    0   F 7 5.112857 1.0035722 0.3793146 0.9281495
+## 2    0   M 8 7.570000 3.6862331 1.3032802 3.0817680
+## 3 0.25   F 5 4.546000 0.6474797 0.2895617 0.8039523
+## 4 0.25   M 5 4.736000 0.8721984 0.3900590 1.0829773
+## 5  0.5   F 7 5.927143 2.2391793 0.8463302 2.0708954
+## 6  0.5   M 8 5.503750 0.9006813 0.3184389 0.7529884
+## 7 0.75   F 6 5.513333 0.9354927 0.3819133 0.9817394
+## 8 0.75   M 4 4.810000 0.5243409 0.2621704 0.8343433</code></pre>
+</div>
+<div id="visualisation-courbes-1" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Visualisation, courbes</h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> gran, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> gran <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> gran <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+<div id="identifier-les-valeurs-aberrantes-univariées-2" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Identifier les valeurs aberrantes univariées</h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb63-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(aa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb63-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(gran)</a>
+<a class="sourceLine" id="cb63-4" title="4"></a>
+<a class="sourceLine" id="cb63-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   aa       id sex    gran is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 0         6 M     14.6  TRUE       FALSE     
+## 2 0.5      36 F     10.4  TRUE       TRUE      
+## 3 0.75     49 F      7.06 TRUE       FALSE</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(gran)</a>
+<a class="sourceLine" id="cb65-4" title="4"></a>
+<a class="sourceLine" id="cb65-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 6
+##   sex      id aa     gran is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 F        36 0.5    10.4 TRUE       TRUE      
+## 2 M         6 0      14.6 TRUE       TRUE</code></pre>
+<p>On exclura les 2 dernières observations</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="st"> </span>id <span class="op">%in%</span><span class="st"> </span>df_out<span class="op">$</span>id)</a></code></pre></div>
+</div>
+<div id="revisualisation-boxplots-sans-les-valeurs-extrèmes-2" class="section level3">
+<h3><span class="header-section-number">3.4.5</span> Revisualisation boxplots sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> gran, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb68-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;GRAN&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+</div>
+<div id="revisualisation-courbes-sans-les-valeurs-extrèmes-1" class="section level3">
+<h3><span class="header-section-number">3.4.6</span> Revisualisation courbes sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df,</a>
+<a class="sourceLine" id="cb69-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;gran&quot;</span>, </a>
+<a class="sourceLine" id="cb69-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb69-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N     gran        sd        se        ci
+## 1    0   F 7 5.112857 1.0035722 0.3793146 0.9281495
+## 2    0   M 7 6.564286 2.5323366 0.9571333 2.3420207
+## 3 0.25   F 5 4.546000 0.6474797 0.2895617 0.8039523
+## 4 0.25   M 5 4.736000 0.8721984 0.3900590 1.0829773
+## 5  0.5   F 6 5.186667 1.1878328 0.4849307 1.2465540
+## 6  0.5   M 8 5.503750 0.9006813 0.3184389 0.7529884
+## 7 0.75   F 6 5.513333 0.9354927 0.3819133 0.9817394
+## 8 0.75   M 4 4.810000 0.5243409 0.2621704 0.8343433</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> gran, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> gran <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> gran <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb71-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+</div>
+<div id="le-modèle-4" class="section level3">
+<h3><span class="header-section-number">3.4.7</span> Le modèle</h3>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(gran <span class="op">~</span><span class="st"> </span>aa <span class="op">*</span><span class="st"> </span>sex, </a>
+<a class="sourceLine" id="cb72-2" title="2">         <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">aa =</span> contr.sum, <span class="dt">sex =</span> contr.sum), </a>
+<a class="sourceLine" id="cb72-3" title="3">         <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb72-4" title="4"></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="kw">Anova</span>(lm, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: gran
+##              Sum Sq Df  F value Pr(&gt;F)    
+## (Intercept) 1263.75  1 752.5327 &lt;2e-16 ***
+## aa             8.61  3   1.7098 0.1804    
+## sex            1.13  1   0.6730 0.4169    
+## aa:sex         6.92  3   1.3737 0.2647    
+## Residuals     67.17 40                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Les différences ne sont pas significatives. Mais vérifions la validité de l’ANOVA.</p>
+<div id="indépendance-des-résidus-5" class="section level4">
+<h4><span class="header-section-number">3.4.7.1</span> Indépendance des résidus</h4>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+</div>
+<div id="normalité-des-résidus-5" class="section level4">
+<h4><span class="header-section-number">3.4.7.2</span> Normalité des résidus</h4>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+</div>
+</div>
+<div id="homogénéité-des-variances-5" class="section level3">
+<h3><span class="header-section-number">3.4.8</span> Homogénéité des variances</h3>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Les hypothèses de l’ANOVA ne sont à l’évidence pas respectées. Les transformations <code>log()</code>, <code>sqrt()</code> ni <code>Box-Cox</code> n’améliorent pas non plus la distribution. Ajustons le modèle sans le terme d’interaction et voyons comment il se comporte, sans les 2 points extrêmes.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(gran <span class="op">~</span><span class="st"> </span>aa <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb77-2" title="2"><span class="kw">Anova</span>(lm)</a></code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: gran
+##           Sum Sq Df F value Pr(&gt;F)
+## aa         8.399  3  1.6248 0.1976
+## sex        2.075  1  1.2042 0.2786
+## Residuals 74.094 43</code></pre>
+<p>=&gt; Différence d’effet non significative.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div id="comparaisons-par-paires-4" class="section level4">
+<h4><span class="header-section-number">3.4.8.1</span> Comparaisons par paires</h4>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">C1 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">aa =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb82-2" title="2">C2 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">sex =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb82-3" title="3">C &lt;-<span class="st"> </span><span class="kw">rbind</span>(C1, C2) </a>
+<a class="sourceLine" id="cb82-4" title="4">C</a></code></pre></div>
+<pre><code>##             (Intercept) aa0.25 aa0.5 aa0.75 sexM
+## 0.25 - 0              0      1     0      0    0
+## 0.5 - 0               0      0     1      0    0
+## 0.75 - 0              0      0     0      1    0
+## 0.5 - 0.25            0     -1     1      0    0
+## 0.75 - 0.25           0     -1     0      1    0
+## 0.75 - 0.5            0      0    -1      1    0
+## M - F                 0      0     0      0    1</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C))</a></code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: lm(formula = gran ~ aa + sex, data = df)
+## 
+## Linear Hypotheses:
+##                  Estimate Std. Error t value Pr(&gt;|t|)
+## 0.25 - 0 == 0    -1.19757    0.54350  -2.203    0.165
+## 0.5 - 0 == 0     -0.50063    0.49689  -1.008    0.823
+## 0.75 - 0 == 0    -0.56469    0.54484  -1.036    0.807
+## 0.5 - 0.25 == 0   0.69694    0.54418   1.281    0.661
+## 0.75 - 0.25 == 0  0.63288    0.58828   1.076    0.786
+## 0.75 - 0.5 == 0  -0.06406    0.54742  -0.117    1.000
+## M - F == 0        0.41883    0.38167   1.097    0.774
+## (Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="kw">plot</span>(<span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C)))</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="red-blood-cell-rbc-106μl" class="section level2">
+<h2><span class="header-section-number">3.5</span> Red blood cell <code>rbc</code> (10^6/μL)</h2>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">df &lt;-<span class="st"> </span>df_copy <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="st">  </span><span class="kw">select</span>(id, aa, sex, rbc)</a></code></pre></div>
+<div id="exploration-visuelle-boxplots-6" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Exploration visuelle, boxplots</h3>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> rbc, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb88-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb88-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb88-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;RBC&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+</div>
+<div id="moyennes-et-intervalles-de-confiance-5" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Moyennes et intervalles de confiance</h3>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df, </a>
+<a class="sourceLine" id="cb89-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;rbc&quot;</span>, </a>
+<a class="sourceLine" id="cb89-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb89-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N      rbc         sd         se         ci
+## 1    0   F 7 2.405714 0.31537582 0.11920085 0.29167398
+## 2    0   M 8 2.233750 0.09334077 0.03300095 0.07803484
+## 3 0.25   F 5 2.316000 0.13794927 0.06169279 0.17128664
+## 4 0.25   M 5 2.784000 1.46820639 0.65660186 1.82301901
+## 5  0.5   F 7 2.801429 0.94453566 0.35700092 0.87354979
+## 6  0.5   M 8 2.292500 0.30098647 0.10641479 0.25163099
+## 7 0.75   F 6 2.191667 0.23718488 0.09683032 0.24891026
+## 8 0.75   M 4 2.050000 0.32506410 0.16253205 0.51724952</code></pre>
+</div>
+<div id="visualisation-courbes-2" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Visualisation, courbes</h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> rbc, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> rbc <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> rbc <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>=&gt; Une interaction semble évidente …</p>
+</div>
+<div id="identifier-les-valeurs-aberrantes-univariées-3" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> Identifier les valeurs aberrantes univariées</h3>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(aa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb92-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(rbc)</a>
+<a class="sourceLine" id="cb92-4" title="4"></a>
+<a class="sourceLine" id="cb92-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 6
+##   aa       id sex     rbc is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 0         9 F      2.75 TRUE       FALSE     
+## 2 0        13 F      1.83 TRUE       FALSE     
+## 3 0.25     18 M      5.41 TRUE       TRUE      
+## 4 0.5      34 F      3.43 TRUE       FALSE     
+## 5 0.5      39 F      4.69 TRUE       TRUE</code></pre>
+<p>=&gt; 2 points extrêmes : 18 et 39.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">df_out &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb94-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb94-3" title="3"><span class="st">  </span><span class="kw">identify_outliers</span>(rbc)</a>
+<a class="sourceLine" id="cb94-4" title="4"></a>
+<a class="sourceLine" id="cb94-5" title="5">df_out</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 6
+##   sex      id aa      rbc is.outlier is.extreme
+##   &lt;fct&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt; &lt;lgl&gt;      &lt;lgl&gt;     
+## 1 F        34 0.5    3.43 TRUE       FALSE     
+## 2 F        39 0.5    4.69 TRUE       TRUE      
+## 3 M        18 0.25   5.41 TRUE       TRUE</code></pre>
+<p>=&gt; Les mêmes</p>
+<p>On exclura les 3 observations concernées</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="st"> </span>id <span class="op">%in%</span><span class="st"> </span>df_out<span class="op">$</span>id)</a></code></pre></div>
+</div>
+<div id="revisualisation-boxplots-sans-les-valeurs-extrèmes-3" class="section level3">
+<h3><span class="header-section-number">3.5.5</span> Revisualisation boxplots sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> rbc, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>), <span class="dt">fatten =</span> <span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-3" title="3"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.8</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb97-4" title="4"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb97-5" title="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;RBC&quot;</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+</div>
+<div id="revisualisation-courbes-sans-les-valeurs-extrèmes-2" class="section level3">
+<h3><span class="header-section-number">3.5.6</span> Revisualisation courbes sans les valeurs extrèmes</h3>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">df_ic &lt;-<span class="st"> </span><span class="kw">summarySE</span>(df,</a>
+<a class="sourceLine" id="cb98-2" title="2">                   <span class="dt">measurevar =</span> <span class="st">&quot;rbc&quot;</span>, </a>
+<a class="sourceLine" id="cb98-3" title="3">                   <span class="dt">groupvars =</span> <span class="kw">c</span>(<span class="st">&quot;aa&quot;</span>, <span class="st">&quot;sex&quot;</span>))</a>
+<a class="sourceLine" id="cb98-4" title="4">df_ic</a></code></pre></div>
+<pre><code>##     aa sex N      rbc         sd         se         ci
+## 1    0   F 7 2.405714 0.31537582 0.11920085 0.29167398
+## 2    0   M 8 2.233750 0.09334077 0.03300095 0.07803484
+## 3 0.25   F 5 2.316000 0.13794927 0.06169279 0.17128664
+## 4 0.25   M 4 2.127500 0.02986079 0.01493039 0.04751518
+## 5  0.5   F 5 2.298000 0.17598295 0.07870197 0.21851170
+## 6  0.5   M 8 2.292500 0.30098647 0.10641479 0.25163099
+## 7 0.75   F 6 2.191667 0.23718488 0.09683032 0.24891026
+## 8 0.75   M 4 2.050000 0.32506410 0.16253205 0.51724952</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">ggplot</span>(df_ic, <span class="kw">aes</span>(<span class="dt">x =</span> aa, <span class="dt">y =</span> rbc, <span class="dt">colour =</span> sex, <span class="dt">group =</span> sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb100-2" title="2"><span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> rbc <span class="op">-</span><span class="st"> </span>ci, <span class="dt">ymax =</span> rbc <span class="op">+</span><span class="st"> </span>ci), <span class="dt">width =</span>.<span class="dv">1</span>, <span class="dt">position =</span> p) <span class="op">+</span></a>
+<a class="sourceLine" id="cb100-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb100-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> p, <span class="dt">size =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p>Sans les outliers, probablement pas d’interaction ni de différences significatives.</p>
+</div>
+<div id="anova-sans-les-outliers" class="section level3">
+<h3><span class="header-section-number">3.5.7</span> ANOVA sans les outliers</h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(rbc <span class="op">~</span><span class="st"> </span>aa <span class="op">*</span><span class="st"> </span>sex, </a>
+<a class="sourceLine" id="cb101-2" title="2">         <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">aa =</span> contr.sum, <span class="dt">sex =</span> contr.sum), </a>
+<a class="sourceLine" id="cb101-3" title="3">         <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb101-4" title="4"></a>
+<a class="sourceLine" id="cb101-5" title="5"><span class="kw">Anova</span>(lm, <span class="dt">type =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: rbc
+##              Sum Sq Df   F value Pr(&gt;F)    
+## (Intercept) 219.902  1 4097.8090 &lt;2e-16 ***
+## aa            0.265  3    1.6450 0.1947    
+## sex           0.177  1    3.2901 0.0774 .  
+## aa:sex        0.062  3    0.3838 0.7652    
+## Residuals     2.093 39                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Les différences ne sont pas significatives. Mais vérifions la validité de l’ANOVA.</p>
+<div id="indépendance-des-résidus-6" class="section level4">
+<h4><span class="header-section-number">3.5.7.1</span> Indépendance des résidus</h4>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+</div>
+<div id="normalité-des-résidus-6" class="section level4">
+<h4><span class="header-section-number">3.5.7.2</span> Normalité des résidus</h4>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+</div>
+</div>
+<div id="homogénéité-des-variances-6" class="section level3">
+<h3><span class="header-section-number">3.5.8</span> Homogénéité des variances</h3>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">plot</span>(lm, <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<div id="comparaisons-par-paires-5" class="section level4">
+<h4><span class="header-section-number">3.5.8.1</span> Comparaisons par paires</h4>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">lm &lt;-<span class="st"> </span><span class="kw">lm</span>(rbc <span class="op">~</span><span class="st"> </span>aa <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="kw">Anova</span>(lm)</a></code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: rbc
+##            Sum Sq Df F value  Pr(&gt;F)  
+## aa        0.27503  3  1.7870 0.16431  
+## sex       0.17583  1  3.4274 0.07116 .
+## Residuals 2.15466 42                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1">C1 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">aa =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb108-2" title="2">C2 &lt;-<span class="st"> </span><span class="kw">glht</span>(lm, <span class="kw">mcp</span>(<span class="dt">sex =</span> <span class="st">&quot;Tukey&quot;</span>))<span class="op">$</span>linfct</a>
+<a class="sourceLine" id="cb108-3" title="3">C &lt;-<span class="st"> </span><span class="kw">rbind</span>(C1, C2) </a>
+<a class="sourceLine" id="cb108-4" title="4">C</a></code></pre></div>
+<pre><code>##             (Intercept) aa0.25 aa0.5 aa0.75 sexM
+## 0.25 - 0              0      1     0      0    0
+## 0.5 - 0               0      0     1      0    0
+## 0.75 - 0              0      0     0      1    0
+## 0.5 - 0.25            0     -1     1      0    0
+## 0.75 - 0.25           0     -1     0      1    0
+## 0.75 - 0.5            0      0    -1      1    0
+## M - F                 0      0     0      0    1</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C))</a></code></pre></div>
+<pre><code>## 
+##   Simultaneous Tests for General Linear Hypotheses
+## 
+## Fit: lm(formula = rbc ~ aa + sex, data = df)
+## 
+## Linear Hypotheses:
+##                   Estimate Std. Error t value Pr(&gt;|t|)
+## 0.25 - 0 == 0    -0.092801   0.095685  -0.970    0.841
+## 0.5 - 0 == 0     -0.009209   0.086003  -0.107    1.000
+## 0.75 - 0 == 0    -0.195535   0.092898  -2.105    0.200
+## 0.5 - 0.25 == 0   0.083593   0.098881   0.845    0.896
+## 0.75 - 0.25 == 0 -0.102734   0.104111  -0.987    0.833
+## 0.75 - 0.5 == 0  -0.186327   0.096356  -1.934    0.272
+## M - F == 0       -0.124016   0.066988  -1.851    0.312
+## (Adjusted p values reported -- single-step method)</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb112-2" title="2"><span class="kw">plot</span>(<span class="kw">summary</span>(<span class="kw">glht</span>(lm, <span class="dt">linfct =</span> C)))</a></code></pre></div>
+<p><img src="TIHO_2021_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="touré-2021.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hémoglobine-hgb-gdl.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["TIHO_2021.pdf", "TIHO_2021.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
