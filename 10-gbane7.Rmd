@@ -22,7 +22,7 @@ library(tidyverse)
 
 ## Les données
 
-```{r}
+```{r message=FALSE}
 df <- read_csv("data/degg.csv")
 df <- df %>% 
   add_column(id = 1:nrow(.), .before = 1) %>% 
@@ -47,7 +47,7 @@ df <- df %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r indb3-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = indb)) +
   geom_boxplot() +
   theme_bw() +
@@ -83,7 +83,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r indb3-normplot}
 plot(lm, 2)
 ```
 
@@ -93,7 +93,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r indb3-homsdplot}
 plot(lm, 3)
 ```
 
@@ -116,7 +116,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r indb3-multcomp}
 ggplot(cm, aes(x = diet, y = indb)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 85) +
@@ -138,7 +138,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r indb4-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = indb)) +
   geom_boxplot() +
   theme_bw() +
@@ -174,7 +174,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r indb4-normplot}
 plot(lm, 2)
 ```
 
@@ -184,7 +184,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r indb4-homsdplot}
 plot(lm, 3)
 ```
 
@@ -206,7 +206,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r indb4-multcomp}
 ggplot(cm, aes(x = diet, y = indb)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 95) +
@@ -227,7 +227,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r indb5-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = indb)) +
   geom_boxplot() +
   theme_bw() +
@@ -263,7 +263,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r indb5-normplot}
 plot(lm, 2)
 ```
 
@@ -273,7 +273,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r indb5-homsdplot}
 plot(lm, 3)
 ```
 
@@ -295,7 +295,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r indb5-mulcomp}
 ggplot(cm, aes(x = diet, y = indb)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 100) +
@@ -309,16 +309,13 @@ ggplot(cm, aes(x = diet, y = indb)) +
 ### Évolution de l'Indice B dans le temps selon les régimes
 
 ```{r}
-df_ic <- summarySE(df_copy, 
-                   measurevar = "indb", 
-                   groupvars = c("week", "diet"))
-
+df_ic <- summarySE(df_copy, measurevar = "indb", groupvars = c("week", "diet"))
 #write_csv(df_ic, "tab/indb_moy_temps.csv")
 df_ic
 ```
 
 
-```{r}
+```{r indb-temps}
 ggplot(df_ic, aes(x = week, y = indb, colour = diet, group = diet)) + 
   geom_line(size = 1) +
   geom_point(size = 2) +

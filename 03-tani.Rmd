@@ -38,7 +38,7 @@ library(tidyverse)
 
 Les données du fichier excel sont formatées en tableau `dnfs.csv` pour R.
 
-```{r}
+```{r message=FALSE}
 df <- read_csv("data/dnfs.csv")
 df <- df %>% 
   add_column(id = 1:nrow(.), .before = 1) %>% 
@@ -64,7 +64,7 @@ df <- df %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r wbc-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = wbc, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -101,7 +101,7 @@ Les 4 observations désignées comme étant extrêmes ont été écartées.
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r wbc-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = wbc, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -114,13 +114,11 @@ ggplot(df, aes(x = aa, y = wbc, colour = sex, fill = sex)) +
 ### Visualisation de l'interaction probable
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "wbc", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "wbc", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r wbc-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = wbc, colour = sex, group = sex)) + 
@@ -140,7 +138,6 @@ Sans les outliers, la distribution semble similaire chez les mâles comme chez l
 lm <- lm(wbc ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -150,7 +147,7 @@ L'interaction n'est pas significative, les effets des facteurs pris individuelle
 
 #### Indépendance des résidus
 
-```{r}
+```{r wbd-resplot}
 plot(lm, 1)
 ```
 
@@ -159,7 +156,7 @@ plot(lm, 1)
 
 #### Normalité des résidus
 
-```{r}
+```{r wbc-normplot}
 plot(lm, 2)
 ```
 
@@ -176,7 +173,7 @@ shapiro_test(residuals(lm))
 
 #### Homogénéité des variances
 
-```{r}
+```{r wbc-homsdplot}
 plot(lm, 3)
 ```
 
@@ -185,7 +182,7 @@ plot(lm, 3)
 Les dispersions des résidus (leurs écartements verticaux) relatives à chaque groupe (croisement des modalités des 2 facteurs) sont globalement identiques, l’hypothèse d’homogénéité des résidus peut être acceptée.
 
 
-```{r}
+```{r wbc-plotlm}
 par(mfrow = c(2, 2))
 plot(lm)
 ```
@@ -221,7 +218,7 @@ C
 summary(glht(lm, linfct = C))
 ```
 
-```{r}
+```{r wbc-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -237,7 +234,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r lym-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = lym, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -251,16 +248,14 @@ La distribution semble similaire à celle de la variable précédente.
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "lym", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "lym", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r lym-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = lym, colour = sex, group = sex)) + 
@@ -296,7 +291,7 @@ df <- df %>% filter(! id %in% df_out$id)
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r lym-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = lym, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -309,13 +304,11 @@ ggplot(df, aes(x = aa, y = lym, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "lym", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "lym", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r lym-interact2}
 ggplot(df_ic, aes(x = aa, y = lym, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = lym - ci, ymax = lym + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -332,7 +325,6 @@ Sans les outliers, la distribution semble identique chez les mâles et les femme
 lm <- lm(lym ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -341,21 +333,21 @@ Les différences ne sont pas significatives. Mais vérifions la validité de l'A
 
 #### Indépendance des résidus
 
-```{r}
+```{r lym-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r lym-normplot}
 plot(lm, 2)
 ```
 
 
 ### Homogénéité des variances
 
-```{r}
+```{r lym-homsdplot}
 plot(lm, 3)
 ```
 
@@ -381,7 +373,7 @@ C
 summary(glht(lm, linfct = C))
 ```
 
-```{r}
+```{r lym-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -397,7 +389,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r gran-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -409,16 +401,14 @@ ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "gran", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "gran", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r gran-interact}
 ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = gran - ci, ymax = gran + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -433,7 +423,6 @@ ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) +
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(gran)
-
 df_out
 ```
 
@@ -441,7 +430,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(gran)
-
 df_out
 ```
 
@@ -453,7 +441,7 @@ df <- df %>% filter(! id %in% df_out$id)
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r gran-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -466,13 +454,11 @@ ggplot(df, aes(x = aa, y = gran, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "gran", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "gran", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r gran-interact2}
 ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = gran - ci, ymax = gran + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -487,7 +473,6 @@ ggplot(df_ic, aes(x = aa, y = gran, colour = sex, group = sex)) +
 lm <- lm(gran ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -496,21 +481,21 @@ Les différences ne sont pas significatives. Mais vérifions la validité de l'A
 
 #### Indépendance des résidus
 
-```{r}
+```{r gran-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r gran-normplot}
 plot(lm, 2)
 ```
 
 
 ### Homogénéité des variances
 
-```{r}
+```{r gran-homsdplot}
 plot(lm, 3)
 ```
 
@@ -523,15 +508,15 @@ Anova(lm)
 
 => Différence d'effet non significative. 
 
-```{r}
+```{r gran-resplot2}
 plot(lm, 1)
 ```
 
-```{r}
+```{r gran-normplot2}
 plot(lm, 2)
 ```
 
-```{r}
+```{r gran-homsdplot2}
 plot(lm, 3)
 ```
 
@@ -549,7 +534,7 @@ C
 summary(glht(lm, linfct = C))
 ```
 
-```{r}
+```{r gran-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -565,7 +550,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r rbc-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -577,16 +562,14 @@ ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "rbc", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "rbc", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r rbc-interact}
 ggplot(df_ic, aes(x = aa, y = rbc, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = rbc - ci, ymax = rbc + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -602,7 +585,6 @@ ggplot(df_ic, aes(x = aa, y = rbc, colour = sex, group = sex)) +
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(rbc)
-
 df_out
 ```
 
@@ -612,7 +594,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(rbc)
-
 df_out
 ```
 
@@ -626,7 +607,7 @@ df <- df %>% filter(! id %in% df_out$id)
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r rbc-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -638,13 +619,11 @@ ggplot(df, aes(x = aa, y = rbc, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "rbc", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "rbc", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r rbc-interact2}
 ggplot(df_ic, aes(x = aa, y = rbc, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = rbc - ci, ymax = rbc + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -662,7 +641,6 @@ Sans les outliers, probablement pas d'interaction ni de différences significati
 lm <- lm(rbc ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -671,21 +649,21 @@ Les différences ne sont pas significatives. Mais vérifions la validité de l'A
 
 #### Indépendance des résidus
 
-```{r}
+```{r rbc-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r rbc-normplot}
 plot(lm, 2)
 ```
 
 
 ### Homogénéité des variances
 
-```{r}
+```{r rbc-homsdplot}
 plot(lm, 3)
 ```
 
@@ -711,7 +689,7 @@ summary(glht(lm, linfct = C))
 
 
 
-```{r}
+```{r rbc-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -728,7 +706,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r hgb-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -741,16 +719,14 @@ ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "hgb", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "hgb", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r hgb-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) + 
@@ -767,7 +743,6 @@ ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) +
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(hgb)
-
 df_out
 ```
 
@@ -775,7 +750,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(hgb)
-
 df_out
 ```
 
@@ -787,7 +761,7 @@ df <- df %>% filter(! id %in% df_out$id)
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r hgb-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -800,13 +774,11 @@ ggplot(df, aes(x = aa, y = hgb, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "hgb", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "hgb", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r hgb-interact2}
 ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = hgb - ci, ymax = hgb + ci), width = .1, position = p) +
   geom_line(position = p, size = 1) +
@@ -821,7 +793,6 @@ ggplot(df_ic, aes(x = aa, y = hgb, colour = sex, group = sex)) +
 lm <- lm(hgb ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -831,21 +802,21 @@ L'interaction n'est pas significative. Il y a une différence entre les effets d
 
 #### Indépendance des résidus
 
-```{r}
+```{r hgb-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r hgb-normplot}
 plot(lm, 2)
 ```
 
 
 ### Homogénéité des variances
 
-```{r}
+```{r hgb-homsdplot}
 plot(lm, 3)
 ```
 
@@ -882,7 +853,7 @@ summary(glht(lm, linfct = C))
 ```
 
 
-```{r}
+```{r hgb-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -901,7 +872,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r hct-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -914,16 +885,14 @@ ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "hct", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "hct", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r hct-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = hct, colour = sex, group = sex)) + 
@@ -941,7 +910,6 @@ Pratiquement même allure que la variable précédente ...
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(hct)
-
 df_out
 ```
 
@@ -949,7 +917,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(hct)
-
 df_out
 ```
 
@@ -961,7 +928,7 @@ df <- df %>% filter(! id %in% df_out$id)
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r hct-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -974,13 +941,11 @@ ggplot(df, aes(x = aa, y = hct, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "hct", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "hct", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r hct-interact2}
 ggplot(df_ic, aes(x = aa, y = hct, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = hct - ci, ymax = hct + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -991,29 +956,26 @@ ggplot(df_ic, aes(x = aa, y = hct, colour = sex, group = sex)) +
 
 ### Le modèle
 
-
 ```{r}
 lm <- lm(hct ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
 L'interaction n'est pas significative. Pas de différence ni entre les traitements, ni entre genres. Mais vérifions la validité de l'ANOVA.
 
 
-
 #### Indépendance des résidus
 
-```{r}
+```{r hct-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r hct-normplot}
 plot(lm, 2)
 ```
 
@@ -1024,7 +986,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r hct-homsdplot}
 plot(lm, 3)
 ```
 
@@ -1050,7 +1012,7 @@ summary(glht(lm, linfct = C))
 ```
 
 
-```{r}
+```{r hct-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -1066,7 +1028,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r mcv-plot, warning = FALSE}
 ggplot(df, aes(x = aa, y = mcv, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -1079,16 +1041,14 @@ ggplot(df, aes(x = aa, y = mcv, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "mcv", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "mcv", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r mcv-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = mcv, colour = sex, group = sex)) + 
@@ -1105,7 +1065,6 @@ ggplot(df_ic, aes(x = aa, y = mcv, colour = sex, group = sex)) +
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(mcv)
-
 df_out
 ```
 
@@ -1113,7 +1072,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(mcv)
-
 df_out
 ```
 
@@ -1132,7 +1090,6 @@ Aucune observation qui pourrait être exclue en activant le code ci-dessous :
 lm <- lm(mcv ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -1142,14 +1099,14 @@ L'interaction n'est pas significative. Il y a une différence dans l'effet genre
 
 #### Indépendance des résidus
 
-```{r}
+```{r mcv-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r mcv-normplot}
 plot(lm, 2)
 ```
 
@@ -1160,7 +1117,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r mcv-homsdplot}
 plot(lm, 3)
 ```
 
@@ -1172,7 +1129,7 @@ lm <- lm(mcv ~ sex, data = df)
 Anova(lm)
 ```
 
-Il n'y a une différence d'effet significatif entre genre.
+Il y a une différence d'effet significative entre genre.
 
 
 ### Comparaisons par paires
@@ -1186,8 +1143,6 @@ cm
 ```
 
 
-
-
 ## Platelet `plt` (10^3/μL)
 
 ```{r}
@@ -1198,7 +1153,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r plt-boxplot, warning = FALSE}
 ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -1211,16 +1166,14 @@ ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "plt", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "plt", groupvars = c("aa", "sex"))
 df_ic
 ```
 
 
 ### Visualisation, courbes
 
-```{r}
+```{r plt-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) + 
@@ -1231,14 +1184,12 @@ ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) +
 ```
 
 
-
 ### Identifier les valeurs aberrantes univariées
 
 ```{r}
 df_out <- df %>% 
   group_by(aa) %>% 
   identify_outliers(plt)
-
 df_out
 ```
 
@@ -1246,7 +1197,6 @@ df_out
 df_out <- df %>% 
   group_by(sex) %>% 
   identify_outliers(plt)
-
 df_out
 ```
 
@@ -1258,7 +1208,7 @@ On exclura les extrêmes suivant le genre et celle de aa qui ne se retrouve pas 
 
 ### Revisualisation boxplots sans les valeurs extrèmes
 
-```{r warning = FALSE}
+```{r plt-boxplot2, warning = FALSE}
 ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -1271,13 +1221,11 @@ ggplot(df, aes(x = aa, y = plt, colour = sex, fill = sex)) +
 ### Revisualisation courbes sans les valeurs extrèmes
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "plt", 
-                   groupvars = c("aa", "sex"))
+df_ic <- summarySE(df, measurevar = "plt", groupvars = c("aa", "sex"))
 df_ic
 ```
 
-```{r}
+```{r plt-interact2}
 ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) + 
   geom_errorbar(aes(ymin = plt - ci, ymax = plt + ci), width =.1, position = p) +
   geom_line(position = p, size = 1) +
@@ -1285,15 +1233,12 @@ ggplot(df_ic, aes(x = aa, y = plt, colour = sex, group = sex)) +
 ```
 
 
-
 ### Le modèle
-
 
 ```{r}
 lm <- lm(sqrt(plt) ~ aa * sex, 
          contrasts = list(aa = contr.sum, sex = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -1315,7 +1260,6 @@ head(df)
 df_out <- df %>% 
   group_by(aa_sex) %>% 
   identify_outliers(plt)
-
 df_out
 ```
 
@@ -1335,14 +1279,14 @@ Anova(lm)
 
 #### Indépendance des résidus
 
-```{r}
+```{r plt-resplot}
 plot(lm, 1)
 ```
 
 
 #### Normalité des résidus
 
-```{r}
+```{r plt-normplot}
 plot(lm, 2)
 ```
 
@@ -1353,7 +1297,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r plt-homsdplot}
 plot(lm, 3)
 ```
 

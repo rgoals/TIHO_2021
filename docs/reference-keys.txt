@@ -365,3 +365,4 @@ graphe-avec-les-comparaisons-23
 évolution-de-la-concentration-en-cholestérol-dans-le-temps-selon-les-régimes
 lymphocytes-lym-103μl
 hémoglobine-hgb-gdl
+les-librairies-r-utilisées

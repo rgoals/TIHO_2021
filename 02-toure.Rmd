@@ -14,6 +14,8 @@ Variables expliquées :
 
 Comparer les effets des variables explicatives sur chacune des variables dépendantes en tenant compte de l'interaction `org * ext`.
 
+## Les librairies R utilisées
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(ggpubr)
 library(rstatix)
@@ -31,7 +33,7 @@ library(tidyverse)
 
 Les données du tableau Excel sont formatées dans un tableau csv `dorg.csv` pour R.
 
-```{r}
+```{r message=FALSE}
 df <- read_csv("data/dorg.csv")
 df <- df %>% 
   add_column(id = 1:nrow(.), .before = 1) %>% 
@@ -48,7 +50,7 @@ glimpse(df)
 
 ### Exploration visuelle, boxplots
 
-```{r warning=FALSE}
+```{r gae-boxplot, warning=FALSE}
 ggplot(df, aes(x = org, y = gae, colour = ext, fill = ext)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -62,16 +64,14 @@ ggplot(df, aes(x = org, y = gae, colour = ext, fill = ext)) +
 En considérant le regroupement (les combinaisons des 2 facteurs `org` et `ext`).
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "gae", 
-                   groupvars = c("org", "ext"))
+df_ic <- summarySE(df, measurevar = "gae", groupvars = c("org", "ext"))
 df_ic
 ```
 
 
 ### Visualisation de l'interaction éventuelle
 
-```{r}
+```{r gae-interact}
 p <- position_dodge(0.1) # pour éviter le chevauchement éventuel des points
 
 ggplot(df_ic, aes(x = org, y = gae, colour = ext, group = ext)) + 
@@ -101,7 +101,6 @@ Les facteurs pris idividuellement ou avec interaction, aucune observation n'est 
 lm <- lm(gae ~ org * ext, 
           contrasts = list(org = contr.sum, ext = contr.sum), 
           data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -112,7 +111,7 @@ L'effet de l'interaction est significatif. On ne devrait donc pas interpréter l
 
 #### Indépendance des résidus
 
-```{r}
+```{r gae-resplot}
 plot(lm, 1)
 ```
 
@@ -121,7 +120,7 @@ plot(lm, 1)
 
 #### Normalité des résidus
 
-```{r}
+```{r gae-normplot}
 plot(lm, 2)
 ```
 
@@ -134,7 +133,7 @@ shapiro_test(residuals(lm))
 
 #### Homogénéité des variances
 
-```{r}
+```{r gae-homsdplot}
 plot(lm, 3)
 ```
 
@@ -145,7 +144,6 @@ ANOVA à 2 facteurs avec les conditions non valides : alternative => réaliser l
 ```{r}
 df <- df %>% 
     mutate(org_ext = interaction(org, ext, sep = "_"))
-
 df %>% sample_n_by(org, ext, size = 1) # visualiser la variable de groupe
 ```
 
@@ -200,7 +198,7 @@ Il est également possible de visualiser ces comparaions multiples sur un graphe
 
 [On peut alors utiliser ces lettres pour les ajouter sur un graph réalisé avec ggplot2](https://delladata.fr/comparaison-de-moyennes-indiquer-les-differences-significatives-sur-le-graph).
 
-```{r}
+```{r gae-multcomp}
 ggplot(cm, aes(x = org_ext, y = gae)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 16) +
@@ -217,7 +215,7 @@ La démarche est la même.
 
 ### Exploration visuelle, boxplots
 
-```{r warning=FALSE}
+```{r qe-boxplot, warning=FALSE}
 ggplot(df, aes(x = org, y = qe, colour = ext, fill = ext)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.8), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.8)) + 
@@ -229,16 +227,14 @@ ggplot(df, aes(x = org, y = qe, colour = ext, fill = ext)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df, 
-                   measurevar = "qe", 
-                   groupvars = c("org", "ext"))
+df_ic <- summarySE(df, measurevar = "qe", groupvars = c("org", "ext"))
 df_ic
 ```
 
 
 ### Visualisation de l'interaction probable
 
-```{r}
+```{r qe-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = org, y = qe, colour = ext, group = ext)) + 
@@ -269,7 +265,6 @@ Aucune.
 lm <- lm(qe ~ org * ext, 
           contrasts = list(org = contr.sum, ext = contr.sum), 
           data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -280,7 +275,7 @@ L'interaction ici est négligeable, mais vérifions la validité de l'anova avan
 
 #### Indépendance des résidus
 
-```{r}
+```{r qe-resplot}
 plot(lm, 1)
 ```
 
@@ -289,7 +284,7 @@ plot(lm, 1)
 
 #### Normalité des résidus
 
-```{r}
+```{r qe-normplot}
 plot(lm, 2)
 ```
 
@@ -302,7 +297,7 @@ shapiro_test(residuals(lm))
 
 #### Homogénéité des variances
 
-```{r}
+```{r qe-homsdplot}
 plot(lm, 3)
 ```
 
@@ -355,7 +350,7 @@ summary(glht(lm, linfct = C))
 ```
 
 
-```{r}
+```{r qe-pwc}
 par(mar = c(3, 15, 0, 3))
 plot(summary(glht(lm, linfct = C)))
 ```
@@ -377,7 +372,7 @@ Même démarche.
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r te-boxplot, warning = FALSE}
 ggplot(df, aes(x = org, y = te, colour = ext, fill = ext)) +
   geom_boxplot(alpha = 0.5, position = position_dodge(width = 0.7), fatten = NULL) +
   stat_summary(fun.y = mean, position = position_dodge(width = 0.7)) + 
@@ -389,16 +384,14 @@ ggplot(df, aes(x = org, y = te, colour = ext, fill = ext)) +
 ### Moyennes et intervalles de confiance
 
 ```{r}
-df_ic <- summarySE(df,
-                   measurevar = "te", 
-                   groupvars = c("org", "ext"))
+df_ic <- summarySE(df, measurevar = "te", groupvars = c("org", "ext"))
 df_ic
 ```
 
 
 ### Visualisation
 
-```{r}
+```{r te-interact}
 p <- position_dodge(0.1)
 
 ggplot(df_ic, aes(x = org, y = te, colour = ext, group = ext)) + 
@@ -429,7 +422,6 @@ Aucune.
 lm <- lm(te ~ org * ext, 
          contrasts = list(org = contr.sum, ext = contr.sum), 
          data = df)
-
 Anova(lm, type = 3)
 ```
 
@@ -440,7 +432,7 @@ L'interaction est significative, mais vérifions la validité de l'anova avant t
 
 #### Indépendance des résidus
 
-```{r}
+```{r te-resplot}
 plot(lm, 1)
 ```
 
@@ -449,7 +441,7 @@ plot(lm, 1)
 
 #### Normalité des résidus
 
-```{r}
+```{r te-normplot}
 plot(lm, 2)
 ```
 
@@ -464,7 +456,7 @@ Selon ce test, on pourrait supposer que la distribution des résidus est normale
 
 #### Homogénéité des variances
 
-```{r}
+```{r te-homsdplot}
 plot(lm, 3)
 ```
 
@@ -503,7 +495,7 @@ cm <- (SNK.test(lm, "org_ext", group = TRUE))$groups %>%
 cm
 ```
 
-```{r}
+```{r te-multcomp}
 ggplot(cm, aes(x = org_ext, y = te)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 3.5) +

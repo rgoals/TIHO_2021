@@ -32,7 +32,7 @@ library(agricolae)
 
 ## Les données
 
-```{r}
+```{r message=FALSE}
 df <- read_csv("data/degg.csv")
 df <- df %>% 
   add_column(id = 1:nrow(.), .before = 1) %>% 
@@ -57,7 +57,7 @@ df <- df %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r egg3-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = egg)) +
   geom_boxplot() +
   theme_bw() +
@@ -93,7 +93,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r egg3-normplot}
 plot(lm, 2)
 ```
 
@@ -103,7 +103,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r egg3-homsdplot}
 plot(lm, 3)
 ```
 
@@ -125,7 +125,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r egg3-multcomp}
 ggplot(cm, aes(x = diet, y = egg)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 15) +
@@ -149,7 +149,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r egg4-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = egg)) +
   geom_boxplot() +
   theme_bw() +
@@ -185,7 +185,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r egg4-normplot}
 plot(lm, 2)
 ```
 
@@ -195,7 +195,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r egg4-homsdplot}
 plot(lm, 3)
 ```
 
@@ -217,7 +217,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r egg4-multcomp}
 ggplot(cm, aes(x = diet, y = egg)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 15) +
@@ -240,7 +240,7 @@ df <- df_copy %>%
 
 ### Exploration visuelle, boxplots
 
-```{r warning = FALSE}
+```{r egg5-boxplot, warning = FALSE}
 ggplot(df, aes(x = diet, y = egg)) +
   geom_boxplot() +
   theme_bw() +
@@ -276,7 +276,7 @@ Anova(lm)
 
 ### Normalité des résidus
 
-```{r}
+```{r egg5-normplot}
 plot(lm, 2)
 ```
 
@@ -286,7 +286,7 @@ shapiro_test(residuals(lm))
 
 ### Homogénéité des variances
 
-```{r}
+```{r egg5-homsdplot}
 plot(lm, 3)
 ```
 
@@ -308,7 +308,7 @@ cm
 
 ### Graphe avec les comparaisons
 
-```{r}
+```{r egg5-multcomp}
 ggplot(cm, aes(x = diet, y = egg)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 15) +
@@ -322,16 +322,13 @@ ggplot(cm, aes(x = diet, y = egg)) +
 ### Évolution de la masse de l'oeuf dans le temps selon les régimes
 
 ```{r}
-df_ic <- summarySE(df_copy, 
-                   measurevar = "egg", 
-                   groupvars = c("week", "diet"))
-
+df_ic <- summarySE(df_copy, measurevar = "egg", groupvars = c("week", "diet"))
 #write_csv(df_ic, "tab/egg_moy_temps.csv")
 df_ic
 ```
 
 
-```{r}
+```{r egg-temps}
 ggplot(df_ic, aes(x = week, y = egg, colour = diet, group = diet)) + 
   geom_line(size = 1) +
   geom_point(size = 2) +
@@ -339,7 +336,7 @@ ggplot(df_ic, aes(x = week, y = egg, colour = diet, group = diet)) +
   theme_bw()
 ```
 
-Figure impressionnante, mais tenir compte des valeurs de l'axe des ordonnées. Nous sommes dans le gramme en plus !
+Tendances d'une semaine à l'autre difficile à exploiter !
 
 
 
@@ -351,7 +348,6 @@ En associant le temps pour faire du bivarié, voici un cas où l'interaction s'a
 lm <- lm(egg ~ week * diet, 
           contrasts = list(week = contr.sum, diet = contr.sum), 
           data = df_copy)
-
 Anova(lm, type = 3)
 ```
 
@@ -396,7 +392,7 @@ mc
 
 #### Graphe avec les comparaisons
 
-```{r}
+```{r egg-pwc}
 ggplot(mc, aes(x = grp, y = egg)) + 
   geom_bar(stat = "identity", color = "blue", fill = "grey", width = 0.6) +
   ylim(0, 15) +
